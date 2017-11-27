@@ -6,14 +6,35 @@
 이전에는 Git의 사용용도를 소스 백업정도로 활용해왔습니다. Git의 여러 기능들을 활용하지 않아서 불편했던 점을 개선하고자 Git 사용법을 공부하고 전략을 세우게 되었습니다.
 
 ##Git-flow를 먼저 알고 가자
-Git-flow란 Git 브랜치를 효과적으로 나누고 관리하는 좋은 방법을 제시하는 모델이다. 
-크게 5가지의 브랜치가 있다. 
-메인 브랜치로는 master, develop 이 있고, 임시 브랜치로는 feature, release, hotfix가 있다.
+Git-flow란 Git 브랜치를 효과적으로 나누고 관리하는 전략을 말합니다.
+크게 5가지의 브랜치가 있습니다.
+메인 브랜치로는 master, develop 이 있고, 임시 브랜치로는 feature, release, hotfix가 있습니다. 각 브랜치를 간략하게 설명해보겠습니다.
+- master: 최종본 브랜치
+- develop: 개발 중인 브랜치
+- feature: 기능 개발용 브랜치
+- release: 이번 버전 출시용 브랜치 
+- hotfix: relase 후 발생한 버그 수정용 브랜치
+
+아래 그림을 함께 보면 이해가 쉽습니다.
+
+master브랜치로 시작을 하고, develop 브랜치를 만듭니다. develop 브랜치로 작업을 진행하다가 새로운 기능을 넣기위해 feature브랜치를 만들고 작업을 이어갑니다. (기능에 따라서 여러개의 feature브랜치가 생성됩니다.)
+기능이 완료되면 develop 브랜치로 이동해서 feature브랜치를 merge합니다. (브랜치 이동을 checkout이라고 합니다.)
+개발이 완료되고 출시를 하기위해 release브랜치를 만듭니다. QA를 진행하고, 발견된 버그 수정작업을 진행합니다.
+QA를 모두 통과한 후, release 브랜치를 develop 브랜치로 merge하고, 최종적으로 master 브랜치로 merge합니다. 
+
 ![git-flow 설명](http://3.bp.blogspot.com/-fn9dkyAGwyg/Vm2yi0CeHyI/AAAAAAAAKVY/Op31eQuKzus/s1600/gitflow_1.png)
-[출처] http://www.continuousimprover.com/2015/12/why-i-am-abandoning-gitflow.html
+
+
+
 ##나의 Git 전략
-기본적으로 Git을 시작하면 master 브랜치가 생성이 됩니다. 
+Git을 시작하면 master브랜치만 존재합니다. 나머지 4가지의 브랜치는 임의로 생성하고 명명한 것들입니다. (develop, feature, release, hotfix)
+1인 1프로젝트이고, 개발기간이 주로 2~3개월의 기간인 소규모 프로젝트를 진행하는 입장에서 Git-flow 전략에서 제시한 5가지 브랜치를 모두 이용할 필요는 없다고 판단을 했습니다. 
+메인 브랜치로 mater, develop을 사용하고, 필요에 따라서 feature브랜치를 만들어 활용하는 방법을 선택하게 되었습니다. 
+feature브랜치의 주요 용도는 다음과 같습니다. 
+A라는 기능을 구현하고자 할때, 구현방법은 다양합니다. 예를들어 3가지 방법의 구현방법을 생각하였다고 가정해보겠습니다.
 
 
 
-
+[출처] 
+http://www.continuousimprover.com/2015/12/why-i-am-abandoning-gitflow.html
+http://woowabros.github.io/experience/2017/10/30/baemin-mobile-git-branch-strategy.html
