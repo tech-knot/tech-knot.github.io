@@ -1,25 +1,19 @@
----
-layout: post
-title:  "Welcome to Jekyll!"
-date:   2017-11-27 11:52:38 +0900
-categories: jekyll update
----
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
+# 안드로이드 개발 시  Git 관리하기
+안녕하세요. 오늘 애기할 주제는 안드로이드 스튜디오에서 Git 연동을 어떻게 시작하면 좋을지에 대해서 설명하고자 합니다. 
 
-To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+##시작에 앞서..
+일단 저희 안드로이드 개발팀은 소규모로 구성되어 있습니다. 2명이서 협업을 한 프로젝트도 있지만, 대부분은 1인 1프로젝트로 진행이 됩니다. 
+이전에는 Git의 사용용도를 소스 백업정도로 활용해왔습니다. Git의 여러 기능들을 활용하지 않아서 불편했던 점을 개선하고자 Git 사용법을 공부하고 전략을 세우게 되었습니다.
 
-Jekyll also offers powerful support for code snippets:
+##Git-flow를 먼저 알고 가자
+Git-flow란 Git 브랜치를 효과적으로 나누고 관리하는 좋은 방법을 제시하는 모델이다. 
+크게 5가지의 브랜치가 있다. 
+메인 브랜치로는 master, develop 이 있고, 임시 브랜치로는 feature, release, hotfix가 있다.
+![git-flow 설명](http://3.bp.blogspot.com/-fn9dkyAGwyg/Vm2yi0CeHyI/AAAAAAAAKVY/Op31eQuKzus/s1600/gitflow_1.png)
+[출처] http://www.continuousimprover.com/2015/12/why-i-am-abandoning-gitflow.html
+##나의 Git 전략
+기본적으로 Git을 시작하면 master 브랜치가 생성이 됩니다. 
 
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
 
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+
