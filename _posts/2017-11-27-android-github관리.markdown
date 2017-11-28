@@ -58,5 +58,5 @@ feature-1, feature-2, feature-3 이렇게 3가지의 feature 브랜치들을 생
 
 [출처]
 [http://www.continuousimprover.com/2015/12/why-i-am-abandoning-gitflow.html](http://www.continuousimprover.com/2015/12/why-i-am-abandoning-gitflow.html)
-[http://woowabros.github.io/experience/2017/10/30/baemin-mobile-git-branch-strategy.html](http://woowabros.github.io/experience/2017/10/30/baemin-mobile-git-branch-strategy.html)
+[우아한형제들]http://woowabros.github.io/experience/2017/10/30/baemin-mobile-git-branch-strategy.html)
 [http://ourcstory.tistory.com/131](http://ourcstory.tistory.com/131)
