@@ -9,18 +9,18 @@ categories: blog jekyll github
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
 - [Chapter 1 - Getting Started](#chapter-1-getting-started)
-	- [구조](#)
-	- [Ruby 설치](#ruby-)
+	- [구조](#구조)
+	- [Ruby 설치](#ruby-설치)
 		- [Mac OS](#mac-os)
 		- [Windows](#windows)
-	- [Jekyll & Bundler 설치](#jekyll-bundler-)
-	- [Git 저장소 클론](#git-)
-	- [로컬에서 구동해보기](#-)
-	- [사이트 접속하기](#-)
+	- [Jekyll & Bundler 설치](#jekyll-bundler-설치)
+	- [Git 저장소 클론](#git-저장소-클론)
+	- [로컬에서 구동해보기](#로컬에서-구동해보기)
+	- [사이트 접속하기](#사이트-접속하기)
 - [Chapter 2 - Posting](#chapter-2-posting)
-	- [구조](#)
-	- [초안 작성](#-)
-	- [게시](#)
+	- [구조](#구조)
+	- [초안 작성](#초안-작성)
+	- [게시](#게시)
 
 <!-- /TOC -->
 
