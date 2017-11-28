@@ -55,7 +55,13 @@ Github의 무료 서비스인 Page 호스팅과 Jekyll이라는 Ruby 기반의 �
 * 터미널에서 아래 설치 명령어를 통해 설치할 수 있습니다.  
 (필요에 따라 관리자 권한을 요구할 수 있으므로 sudo 명령어를 함께 입력할 수도 있습니다)  
 * Windows에서는 Command prompt with ruby and rails를 실행해 설치할 수 있습니다.
-
+{% highlight ruby %}
+def print_hi(name)
+  puts "Hi, #{name}"
+end
+print_hi('Tom')
+#=> prints 'Hi, Tom' to STDOUT.
+{% endhighlight %}
 ```
 $ gem install jekyll bundler
 ```
