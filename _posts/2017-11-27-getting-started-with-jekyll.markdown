@@ -25,14 +25,14 @@ categories: blog jekyll github
 <!-- /TOC -->
 
 # Chapter 1 - Getting Started
-이 챕터에서는 테크 블로그를 사용하기 위한 기본적인 준비단계입니다. 어떻게 블로그가 구동되는지, 어떤 기술들이 사용되는지 설명하고 최종적으로 글을 작성해볼 수 있는 단계까지 설명합니다.
+이 챕터는 테크 블로그를 사용하기 위한 기본적인 준비단계입니다. 어떻게 블로그가 구동되는지, 어떤 기술들이 사용되는지 설명하고 최종적으로 글을 작성해볼 수 있는 단계까지 설명합니다.
 ## 구조
-Github의 무료 서비스인 Page호스팅과 Jekyll이라는 Ruby 기반의 정적 사이트 생성기를 이용합니다. 따라서 각각의 글은 모두 Github에 공개되어 있으며, Markdown 문법을 활용해 작성하면 Jekyll에 의해 정적 사이트로 열람할 수 있습니다. 사용을 위해 Jekyll의 사용법과 Markdown 문법을 숙지하는 것이 좋습니다. 
+Github의 무료 서비스인 Page 호스팅과 Jekyll이라는 Ruby 기반의 정적 사이트 생성기를 이용합니다. 따라서 각각의 글은 모두 Github을 통해 공개되며, Markdown 문법을 활용해 작성하면 Jekyll에 의해 정적 사이트로 조회할 수 있습니다. 사용을 위해 Jekyll의 사용법과 Markdown 문법을 숙지하는 것이 좋습니다. 
 ## Ruby 설치
-사용을 위해서는 [Ruby](https://www.ruby-lang.org/ko/)를 설치해야 합니다. 
+먼저 Jekyll 설치를 위해 [Ruby](https://www.ruby-lang.org/ko/)를 설치해야 합니다. 
 ### Mac OS
 ---
-맥 OS에는 System Ruby가 이미 설치되어 있기 때문에 추가로 루비를 설치할 필요가 없습니다.
+맥 OS에는 System Ruby가 이미 설치되어 있기 때문에 추가로 루비를 설치할 필요가 없습니다. 😄
 
 ### Windows
 ---
@@ -41,14 +41,14 @@ Github의 무료 서비스인 Page호스팅과 Jekyll이라는 Ruby 기반의 �
 ## Jekyll & Bundler 설치
 * 터미널에서 아래 설치 명령어를 통해 설치할 수 있습니다.  
 (필요에 따라 관리자 권한을 요구할 수 있으므로 sudo 명령어를 함께 입력할 수도 있습니다)  
-* Windows에서는 CommandLine With Ruby를 실행해 아래 설치 명령어를 통해 설치할 수 있습니다.
+* Windows에서는 Command prompt with ruby and rails를 실행해 설치할 수 있습니다.
 
 ```
 $ gem install jekyll bundler
 ```
 
 ## Git 저장소 클론
-블로그 구동을 위한 마무리단계입니다. 아래 블로그저장소를 클론합니다. 
+블로그 구동을 위한 마무리단계입니다. 아래 블로그저장소를 클론해 작업합니다. 
 ```
 $ git clone https://github.com/tech-knot/tech-knot.github.io.git
 ```
