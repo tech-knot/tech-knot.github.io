@@ -30,7 +30,7 @@ theme: minima
 plugins:
   - jekyll-feed
 paginate: 2
-paginate_path: “/posts/page:num/”
+paginate_path: “/blog/page:num/”
 gem:
   - jekyll-paginate
 # Exclude from processing.

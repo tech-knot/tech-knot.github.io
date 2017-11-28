@@ -5,4 +5,3 @@
 layout: home
 ---
 <!-- This loops through the paginated posts -->
-{% include pagination.html %}
