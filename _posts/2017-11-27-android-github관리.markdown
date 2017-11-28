@@ -55,13 +55,14 @@ feature-1, feature-2, feature-3 이렇게 3가지의 feature 브랜치들을 생
 
 
 <br>
-
-{% include short_profile_gil.html %}
-<br>
 [출처]<br>
 [Git-Flow 그림](http://www.continuousimprover.com/2015/12/why-i-am-abandoning-gitflow.html)<br>
 [우아한형제들 기술블로그](http://woowabros.github.io/experience/2017/10/30/baemin-mobile-git-branch-strategy.html)<br>
 [Fork란 무엇인가](http://ourcstory.tistory.com/131)
+<br>
+
+{% include short_profile_gil.html %}
+
 <br>
 
 {% include disqus.html %}
