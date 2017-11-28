@@ -2,7 +2,7 @@
 layout: post
 title: Getting Started with Jekyll
 date:   2017-11-27 11:52:38 +0900
-categories: blog jekyll github
+categories: blog,jekyll,github
 ---
 
 <style>
@@ -19,28 +19,14 @@ categories: blog jekyll github
 	}
 </style>
 
-<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
-
-- [Chapter 1 - Getting Started](#chapter-1-getting-started)
-	- [구조](#구조)
-	- [Ruby 설치](#ruby-설치)
-		- [Mac OS](#mac-os)
-		- [Windows](#windows)
-	- [Jekyll & Bundler 설치](#jekyll-bundler-설치)
-	- [Git 저장소 클론](#git-저장소-클론)
-	- [로컬에서 구동해보기](#로컬에서-구동해보기)
-	- [사이트 접속하기](#사이트-접속하기)
-- [Chapter 2 - Posting](#chapter-2-posting)
-	- [구조](#구조)
-	- [초안 작성](#초안-작성)
-	- [게시](#게시)
-
-<!-- /TOC -->
+0. TOC
+{:toc}
 
 # Chapter 1 - Getting Started
+
 이 챕터는 테크 블로그를 사용하기 위한 기본적인 준비단계입니다. 어떻게 블로그가 구동되는지, 어떤 기술들이 사용되는지 설명하고 최종적으로 글을 작성해볼 수 있는 단계까지 설명합니다.
 ## 구조
-Github의 무료 서비스인 Page 호스팅과 Jekyll이라는 Ruby 기반의 정적 사이트 생성기를 이용합니다. 따라서 각각의 글은 모두 Github을 통해 공개되며, Markdown 문법을 활용해 작성하면 Jekyll에 의해 정적 사이트로 조회할 수 있습니다. 사용을 위해 Jekyll의 사용법과 Markdown 문법을 숙지하는 것이 좋습니다. 
+Github의 무료 서비스인 Page 호스팅과 Jekyll이라는 Ruby 기반의 정적 사이트 생성기를 이용합니다. 따라서 각각의 글은 모두 Github을 통해 공개되며, Markdown 문법을 활용해 작성하면 Jekyll에 의해 정적 사이트로 조회할 수 있습니다. 사용을 위해 Jekyll의 사용법과 [Markdown 문법](http://ccl.cckorea.org/syntax/)을 숙지하는 것이 좋습니다. 
 ## Ruby 설치
 먼저 Jekyll 설치를 위해 [Ruby](https://www.ruby-lang.org/ko/)를 설치해야 합니다. 
 ### Mac OS
@@ -55,28 +41,25 @@ Github의 무료 서비스인 Page 호스팅과 Jekyll이라는 Ruby 기반의 �
 * 터미널에서 아래 설치 명령어를 통해 설치할 수 있습니다.  
 (필요에 따라 관리자 권한을 요구할 수 있으므로 sudo 명령어를 함께 입력할 수도 있습니다)  
 * Windows에서는 Command prompt with ruby and rails를 실행해 설치할 수 있습니다.
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
-```
+
+{% highlight shell %}
 $ gem install jekyll bundler
-```
+{% endhighlight %}
 
 ## Git 저장소 클론
 블로그 구동을 위한 마무리단계입니다. 아래 블로그저장소를 클론해 작업합니다. 
-```
+
+{% highlight shell %}
 $ git clone https://github.com/tech-knot/tech-knot.github.io.git
-```
+{% endhighlight %}
  
 ## 로컬에서 구동해보기
 다운받은 저장소로 이동 후 아래 명령어를 통해 실행해 볼 수 있습니다.
-```
+
+{% highlight shell %}
 $ bundler exec jekyll serve
-```
+{% endhighlight %}
+
 명령어 입력후 로컬에 서버가 구동되면 4000번 포트로 접속해 확인할 수 있습니다.  
 
 주소창에  
@@ -97,7 +80,7 @@ $ bundler exec jekyll serve
 
 
 # Chapter 2 - Posting
-## 구조
+## Jekyll 구조
 Jekyll은 아래와 같은 구조를 가지고 있습니다.
 ```
 .
@@ -123,7 +106,7 @@ Jekyll은 아래와 같은 구조를 가지고 있습니다.
 *출처 : [Jekyll - 구조](http://jekyllrb-ko.github.io/docs/structure/)*
 
 |파일/디렉토리|설명|
-|---|---|
+|:---:|---|
 |`_config.yml`|Jekyll의 환경설정 정보를 저장합니다.|
 |`_drafts`|아직 게시하지 않은 포스트를 말하며 파일명 형식에 날짜가 포함되지 않습니다. 작성중인 글은 `_drafts`에서 작업 후 게시할 때 `_posts`로 이동시킵니다.|
 |`_includes`|재사용에 필요한 파일을 보관합니다. 필요에 따라 포스트나 레이아웃에 삽입할 수 있습니다.<br> `{% raw %}{% include file.extension %}{% endraw %}`와 같이 사용합니다.  |
@@ -137,31 +120,32 @@ Jekyll은 아래와 같은 구조를 가지고 있습니다.
 YAML은 데이터 중심의 직렬화 양식으로 Jekyll에서 사용하는 양식입니다. 각 페이지, 포스트는 글 최상단에 YAML 머리말을 붙여야 하며 머리말에 사용할 수 있는 변수는 아래와 같습니다.
 
 |변수|설명|
-|---|---|
+|:---:|---|
 |`layout`|사용할 레이아웃 파일을 지정합니다. 확장자를 제외한 파일명을 입력하며 레이아웃 파일은 `_layouts` 디렉토리에 위치하도록 합니다.|
 |`permalink`|생성한 블로그 포스트 URL을 사이트 전역 스타일이 아닌 다른 스타일로 만드는데 사용합니다.|
 |`published`|특정 포스트를 비공개로 처리하고 싶으면 `false`로 설정합니다|
-|`category`, `categories`|포스트를 특정 디렉토리 계층에 포함시키지 않고 여러개의 카테고리에 속하도록 할 수 있습니다. 두 개 이상의 카테고리를 지정할 때는 쉼표로 구분합니다.|
+|`category` `categories`|포스트를 특정 디렉토리 계층에 포함시키지 않고 여러개의 카테고리에 속하도록 할 수 있습니다. 두 개 이상의 카테고리를 지정할 때는 쉼표로 구분합니다.|
 |`tags`|카테고리와 유사하며 하나 이상의 태그를 추가할 수 있습니다. 두 개 이상의 태그를 지정할 때는 쉼표로 구분합니다.|
 
 * 위의 미리 정의된 변수 외에 사용자가 임의로 변수를 지정할수도 있습니다. 
-* 변수는 Liquid 문법을 이용해 ``{{ page.title }}``과 같이 사용할 수 있습니다.
+* 변수는 Liquid 문법을 이용해 `{{ page.title }}`과 같이 사용할 수 있습니다.
 * **YAML 머리말을 작성할때는 대쉬 (-) 3개로 감싸도록 합니다**
-```
+
+{% highlight YAML %}
 ---
 layout: android-post
 title: Getting Started with Android Studio
 user-defined-variable: This is a text sentence.
 ---
-```
+{% endhighlight %}
 
 * `date` 변수는 포스트에서만 사용할 수 있는 특별한 변수로 여기에 지정하는 날짜는 포스트의 이름에 적힌 날짜보다 우선순위가 높게 처리됩니다. 주로 포스트를 정렬하기 위해 사용하며 날짜형식은 `YYYY-MM-DD HH:MM:SS +/-TTTT`로 사용합니다. 시간, 분, 초와 타임존 오프셋은 선택사항입니다.
 
 ## 초안 작성
 아직 게시하고 싶지 않은 게시물, 작성중인 게시물은 `_drafts` 디렉토리에 저장합니다. 파일명은 자유롭게 입력해도 좋으며 글 작성 규칙에 맞게만 작성하면 됩니다. 초안을 포함해서 블로그를 보고 싶을때는 `--drafts` 옵션을 추가해서 확인할 수 있습니다.
-```
+{% highlight shell %}
 $ bundler exec jekyll serve --drafts
-```
+{% endhighlight %}
 
 ## 게시
 * 글은 **HTML**, **Markdown**, **Textile** 문법을 지원하며 해당 문법을 지원하는 문서편집기는 자유롭게 선택하시면 됩니다. 
@@ -171,13 +155,44 @@ $ bundler exec jekyll serve --drafts
 
 * 글 상단에는 항상 YAML 머리말을 작성해야 합니다. 
 
-```
+{% highlight YAML %}
 ---
 layout: post
 title: Blogging Like a Hacker
 ---
-```
+{% endhighlight %}
 *출처 : [Jekyll - 머리말](http://jekyllrb-ko.github.io/docs/frontmatter/)*
 
+## 코드 강조
+Jekyll에서는 [Python 기반의 Pygments](http://pygments.org/)나 [Rouge라는 Ruby 기반의 Code Highlighter](http://rouge.jneen.net/)가 포함되어 있습니다. 60개가 넘는 언어를 지원하며 코드를 입력할때는 아래와 같은 포맷으로 입력하면 Code Highlighting이 적용됩니다. (시작 뒷부분에 linenos를 추가하면 코드에 줄번호를 표시할 수 있습니다)
+```
+{% raw %}{% highlight LANGUAGE_NAME linenos %}{% endraw %}
+.
+.
+code 
+.
+.
+{% raw %}{% endhighlight %}{% endraw %}
+```
+아래는 {% raw %}**{% highlight c %}** 와 **{% endhighlight %}**{% endraw %} 사이에 Bubble sort 코드를 삽입한 결과입니다. 
+{% highlight c %}
+int temp[9] = { 3, 2, 1, 5, 4, 7, 8, 0, 6 };
+int tempCount = 9;
+int hold=0, loop, i;
 
+for (loop = 0; loop < tempCount - 1; loop++) {
+    for (i = 0; i < tempCount - 1 - loop; i++) {
+        if (temp[i] > temp[i+1]) {
+            hold = temp[i];
+            temp[i] = temp[i+1];
+            temp[i+1] = hold;
+        }
+    }
+}
 
+for (i = 0; i < tempCount; i++) {
+    printf("%d", temp[i]);
+}
+{% endhighlight %}
+
+*출처 : [거품정렬 - 위키백과](https://ko.wikipedia.org/wiki/%EA%B1%B0%ED%92%88_%EC%A0%95%EB%A0%AC)*
