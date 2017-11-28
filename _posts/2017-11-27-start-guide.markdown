@@ -1,6 +1,9 @@
 ---
 layout: post
-title: Blogging Like a Hacker
+title: Getting Started with Jekyll
+date:   2017-11-27 11:52:38 +0900
+categories: blog jekyll github
+
 ---
 
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
@@ -16,7 +19,8 @@ title: Blogging Like a Hacker
 	- [사이트 접속하기](#-)
 - [Chapter 2 - Posting](#chapter-2-posting)
 	- [구조](#)
-	- [글 작성](#-)
+	- [초안 작성](#-)
+	- [게시](#)
 
 <!-- /TOC -->
 
@@ -38,6 +42,7 @@ Github의 무료 서비스인 Page호스팅과 Jekyll이라는 Ruby 기반의 �
 * 터미널에서 아래 설치 명령어를 통해 설치할 수 있습니다.  
 (필요에 따라 관리자 권한을 요구할 수 있으므로 sudo 명령어를 함께 입력할 수도 있습니다)  
 * Windows에서는 CommandLine With Ruby를 실행해 아래 설치 명령어를 통해 설치할 수 있습니다.
+
 ```
 $ gem install jekyll bundler
 ```
@@ -67,6 +72,10 @@ $ bundler exec jekyll serve
 
 ## 사이트 접속하기
 [Appknot Tech Blog (https://tech-knot.github.io)](https://tech-knot.github.io)에서 확인할 수 있습니다. 
+
+
+----
+
 
 # Chapter 2 - Posting
 ## 구조
@@ -103,6 +112,7 @@ $ bundler exec jekyll serve --drafts
 ## 게시
 * 글은 **HTML**, **Markdown**, **Textile** 문법을 지원하며 해당 문법을 지원하는 문서편집기는 자유롭게 선택하시면 됩니다. 
 * `_posts` 디렉토리에 글을 저장하면 온라인에 게시되며, 파일명은 다음 형식에 맞춰야 합니다. 
+
 > YYYY-MM-DD-포스팅-제목.markdown
 
 * 글 상단에는 항상 YAML 머리말을 작성해야 합니다. 
