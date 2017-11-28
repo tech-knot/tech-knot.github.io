@@ -5,6 +5,20 @@ date:   2017-11-27 11:52:38 +0900
 categories: blog jekyll github
 ---
 
+<style>
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+		border: 2px solid #000000;
+	}
+	th {
+		border: 2px solid #000000;
+	}
+	td {
+		border: 1px solid #000000;
+	}
+</style>
+
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
 - [Chapter 1 - Getting Started](#chapter-1-getting-started)
@@ -106,8 +120,8 @@ Jekyll은 아래와 같은 구조를 가지고 있습니다.
 |---|---|
 |`_config.yml`|Jekyll의 환경설정 정보를 저장합니다.|
 |`_drafts`|아직 게시하지 않은 포스트를 말하며 파일명 형식에 날짜가 포함되지 않습니다. 작성중인 글은 `_drafts`에서 작업 후 게시할 때 `_posts`로 이동시킵니다.|
-|`_includes`|재사용에 필요한 파일을 보관합니다. 필요에 따라 포스트나 레이아웃에 삽입할 수 있으며 Liquid 태그를 지원합니다. |
-|`_layouts`|각 포스트에 사용되는 템플릿을 보관합니다. 글 상단의 YAML 머리말에서 템플릿을 설정할 수 있으며 `{{ content }}` 와 같이 Liquid 태그로 컨텐츠를 삽입합니다.|
+|`_includes`|재사용에 필요한 파일을 보관합니다. 필요에 따라 포스트나 레이아웃에 삽입할 수 있습니다.<br> `{% raw %}{% include file.extension %}{% endraw %}`와 같이 사용합니다.  |
+|`_layouts`|각 포스트에 사용되는 템플릿을 보관합니다. 글 상단의 YAML 머리말에서 템플릿을 설정할 수 있으며 `{% raw %}{{ content }}{% endraw %}` 와 같이 Liquid 태그로 컨텐츠를 삽입합니다.|
 |`_posts`|게시된 컨텐츠를 보관합니다. 파일명 명명 규칙이 존재하며 자세한 내용은 [게시](#게시)를 참고하세요.|
 |`_data`|사이트에 사용하는 데이터를 보관합니다. 예를 들어 `members.yml`이라는 YAML 포맷의 파일이 있다면 `site.data.members`를 입력해 접근할 수 있습니다.|
 |`_site`|Jekyll이 정적 변환을 마친 뒤 생성되는 사이트가 저장되는 기본 경로입니다. `.gitignore`에 추가해서 Git에 업로드 하지 않도록 합니다.|

@@ -3,19 +3,19 @@ layout: default
 title: About
 permalink: /about/
 ---
-<link href="../../assets/about.css" rel="stylesheet">
+<link href="{{ site.url }}/assets/about.css" rel="stylesheet">
 
 앱노트 기술블로그 소개
 ---
 
-안녕하세요. 이 블로그는 디지털 솔루션을 개발하는 앱노트의 기술직원들이 운영하는 기술블로그입니다. 
+안녕하세요. 이 블로그는 디지털 솔루션을 개발하는 앱노트의 기술직원들이 운영하는 기술블로그입니다.  
 앱노트가 배운것을 사람들과 공유하려 합니다. 
 
 ## 사람들
 
 <div class="member-area" >
   <div class="member-image">
-    <img class="profile-image" src="../../assets/profile_armand.png"  alt="tereby@appknot.com" />
+    <img class="profile-image" src="{{ site.url }}/assets/profile_armand.png"  alt="tereby@appknot.com" />
   </div>
   <div class="member-info">
     <div class="short-info">
@@ -30,7 +30,7 @@ permalink: /about/
 
 <div class="member-area">
   <div class="member-image">
-  <img class="profile-image" src="../../assets/profile_alex.png"  alt="cerebrate369@appknot.com" />
+  <img class="profile-image" src="{{ site.url }}/assets/profile_alex.png"  alt="cerebrate369@appknot.com" />
   </div>
   <div class="member-info">
     <div class="short-info">
@@ -45,7 +45,7 @@ permalink: /about/
 
 <div class="member-area">
   <div class="member-image">
-  <img class="profile-image" src="../../assets/profile_gil.png"  alt="story9076@appknot.com" />
+  <img class="profile-image" src="{{ site.url }}/assets/profile_gil.png"  alt="story9076@appknot.com" />
   </div>
   <div class="member-info">
     <div class="short-info">
@@ -60,7 +60,7 @@ permalink: /about/
 
 <div class="member-area">
   <div class="member-image">
-  <img class="profile-image" src="../../assets/profile_maven.png"  alt="slayer@appknot.com" />
+  <img class="profile-image" src="{{ site.url }}/assets/profile_maven.png"  alt="slayer@appknot.com" />
   </div>
   <div class="member-info">
     <div class="short-info">
@@ -75,7 +75,7 @@ permalink: /about/
 
 <div class="member-area">
   <div class="member-image">
-  <img class="profile-image" src="../../assets/profile_damien.png"  alt="tereby@appknot.com" />
+  <img class="profile-image" src="{{ site.url }}/assets/profile_damien.png"  alt="tereby@appknot.com" />
   </div>
   <div class="member-info">
     <div class="short-info">
@@ -90,7 +90,7 @@ permalink: /about/
 
 <div class="member-area">
   <div class="member-image">
-  <img class="profile-image" src="../../assets/profile_lucy.png"  alt="sej0518@appknot.com" />
+  <img class="profile-image" src="{{ site.url }}/assets/profile_lucy.png"  alt="sej0518@appknot.com" />
   </div>
   <div class="member-info">
     <div class="short-info">
