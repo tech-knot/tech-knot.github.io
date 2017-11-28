@@ -1,4 +1,10 @@
-# 안드로이드 Git 관리하기
+---
+layout: post
+title: 안드로이드 Git 관리하기
+date:   2017-11-27 11:02:38 +0900
+categories: blog jekyll github
+
+---
 안녕하세요. 오늘 애기할 주제는 안드로이드 스튜디오에서 Git 연동을 어떻게 시작하면 좋을지에 대해서 설명하고자 합니다. 
 <br>
 ## 시작에 앞서..
@@ -21,7 +27,7 @@ master브랜치로 시작을 하고, develop 브랜치를 만듭니다. develop 
 기능이 완료되면 develop 브랜치로 이동해서 feature브랜치를 merge합니다. (브랜치 이동을 checkout이라고 합니다.)
 개발이 완료되고 출시를 하기위해 release브랜치를 만듭니다. QA를 진행하고, 발견된 버그 수정작업을 진행합니다.
 QA를 모두 통과한 후, release 브랜치를 develop 브랜치로 merge하고, 최종적으로 master 브랜치로 merge합니다. 
-<br>
+<br><br>
 ![git-flow 설명](http://3.bp.blogspot.com/-fn9dkyAGwyg/Vm2yi0CeHyI/AAAAAAAAKVY/Op31eQuKzus/s1600/gitflow_1.png)
 
 
@@ -49,6 +55,7 @@ feature-1, feature-2, feature-3 이렇게 3가지의 feature 브랜치들을 생
 
 
 <br>
+
 [출처]
 [http://www.continuousimprover.com/2015/12/why-i-am-abandoning-gitflow.html](http://www.continuousimprover.com/2015/12/why-i-am-abandoning-gitflow.html)
 [http://woowabros.github.io/experience/2017/10/30/baemin-mobile-git-branch-strategy.html](http://woowabros.github.io/experience/2017/10/30/baemin-mobile-git-branch-strategy.html)
