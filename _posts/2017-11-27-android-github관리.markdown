@@ -1,11 +1,11 @@
 # 안드로이드 Git 관리하기
 안녕하세요. 오늘 애기할 주제는 안드로이드 스튜디오에서 Git 연동을 어떻게 시작하면 좋을지에 대해서 설명하고자 합니다. 
 
-##시작에 앞서..
+## 시작에 앞서..
 일단 저희 안드로이드 개발팀은 소규모로 구성되어 있습니다. 2명이서 협업을 한 프로젝트도 있지만, 대부분은 1인 1프로젝트로 진행이 됩니다. 
 이전에는 Git의 사용용도를 소스 백업정도로 활용해왔습니다. Git의 여러 기능들을 활용하지 않아서 불편했던 점을 개선하고자 Git 사용법을 공부하고 전략을 세우게 되었습니다.
 
-##Git-flow를 먼저 알고 가자
+## Git-flow를 먼저 알고 가자
 Git-flow란 Git 브랜치를 효과적으로 나누고 관리하는 전략을 말합니다.
 크게 5가지의 브랜치가 있습니다.
 메인 브랜치로는 master, develop 이 있고, 임시 브랜치로는 feature, release, hotfix가 있습니다. 각 브랜치를 간략하게 설명해보겠습니다.
@@ -26,7 +26,7 @@ QA를 모두 통과한 후, release 브랜치를 develop 브랜치로 merge하�
 
 
 
-##나의 Git 전략
+## 나의 Git 전략
 Git을 시작하면 master브랜치만 존재합니다. 나머지 4가지의 브랜치는 임의로 생성하고 명명한 것들입니다. (develop, feature, release, hotfix)
 1인 1프로젝트이고, 개발기간이 주로 2~3개월의 기간인 소규모 프로젝트를 진행하는 입장에서 Git-flow 전략에서 제시한 5가지 브랜치를 모두 이용할 필요는 없다고 판단을 했습니다. 
 메인 브랜치로 mater, develop을 사용하고, 필요에 따라서 feature브랜치를 만들어 활용하는 방법을 선택하게 되었습니다. 
@@ -52,7 +52,7 @@ feature-1, feature-2, feature-3 이렇게 3가지의 feature 브랜치들을 생
 
 
 
-[출처] 
-http://www.continuousimprover.com/2015/12/why-i-am-abandoning-gitflow.html
-http://woowabros.github.io/experience/2017/10/30/baemin-mobile-git-branch-strategy.html
-http://ourcstory.tistory.com/131
+[출처]
+[http://www.continuousimprover.com/2015/12/why-i-am-abandoning-gitflow.html](http://www.continuousimprover.com/2015/12/why-i-am-abandoning-gitflow.html)
+[http://woowabros.github.io/experience/2017/10/30/baemin-mobile-git-branch-strategy.html](http://woowabros.github.io/experience/2017/10/30/baemin-mobile-git-branch-strategy.html)
+[http://ourcstory.tistory.com/131](http://ourcstory.tistory.com/131)
