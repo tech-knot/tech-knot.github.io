@@ -5,7 +5,6 @@ date:   2017-11-27 11:02:38 +0900
 categories: blog jekyll github
 
 ---
-# 안드로이드 Git 관리하기
 안녕하세요. 오늘 애기할 주제는 안드로이드 스튜디오에서 Git 연동을 어떻게 시작하면 좋을지에 대해서 설명하고자 합니다. 
 <br>
 ## 시작에 앞서..
@@ -56,7 +55,8 @@ feature-1, feature-2, feature-3 이렇게 3가지의 feature 브랜치들을 생
 
 
 <br>
+
 [출처]
 [http://www.continuousimprover.com/2015/12/why-i-am-abandoning-gitflow.html](http://www.continuousimprover.com/2015/12/why-i-am-abandoning-gitflow.html)
-[http://woowabros.github.io/experience/2017/10/30/baemin-mobile-git-branch-strategy.html](http://woowabros.github.io/experience/2017/10/30/baemin-mobile-git-branch-strategy.html)
+[우아한형제들]http://woowabros.github.io/experience/2017/10/30/baemin-mobile-git-branch-strategy.html)
 [http://ourcstory.tistory.com/131](http://ourcstory.tistory.com/131)
