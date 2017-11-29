@@ -63,5 +63,7 @@ feature-1, feature-2, feature-3 이렇게 3가지의 feature 브랜치들을 생
 
 {% include short_profile_gil.html %}
 
+{% include disqus.html %}
+
 <br>
 
