@@ -1,17 +1,11 @@
-{% for post in site.posts %}
-{% endfor %}
+<div class="pagination">
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path }}" class="previous">&laquo; Previous</a>
+  {% endif %}
 
-{% for post in site.posts %}
-{% endfor %}
+  <span class="page_number">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
 
-  	<div class="pagination">
-    <a class="cusInnerPage" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a>
-    <span class="cusInnerPage">&laquo; Prev</span>
-
-      <em class="cusInnerPage">{{ page }}</em>
-      <a class="cusInnerPage" href="/">{{ page }}</a>
-      <a class="cusInnerPage" href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
-
-    <a class="cusInnerPage" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
-    <span class="cusInnerPage" >Next &raquo;</span>
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path }}" class="next">Next &raquo;</a>
+  {% endif %}
 </div>

@@ -31,8 +31,8 @@ markdown: kramdown
 theme: minima
 plugins:
   - jekyll-feed
-paginate: 2
-paginate_path: “/blog/page:num/”
+paginate: 5
+paginate_path: "paging/page:num/"
 gem:
   - jekyll-paginate
 # Exclude from processing.
