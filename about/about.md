@@ -3,7 +3,7 @@ layout: default
 title: About
 permalink: /about/
 ---
-<link href="{{ site.url }}/assets/about.css" rel="stylesheet">
+<link href="{{ site.url }}/assets/css/about.css" rel="stylesheet">
 
 앱노트 기술블로그 소개
 ---

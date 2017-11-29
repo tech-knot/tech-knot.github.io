@@ -3,6 +3,7 @@ layout: post
 title: Getting Started with Jekyll
 date:   2017-11-27 11:52:38 +0900
 categories: blog,jekyll,github
+author: Damien Jang
 ---
 
 <style>
