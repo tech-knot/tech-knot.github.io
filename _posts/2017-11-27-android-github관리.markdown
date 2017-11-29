@@ -3,7 +3,6 @@ layout: post
 title: 안드로이드 Git 관리하기
 date:   2017-11-27 11:02:38 +0900
 categories: blog jekyll github
-comments: true
 ---
 안녕하세요. 오늘 애기할 주제는 안드로이드 스튜디오에서 Git 연동을 어떻게 시작하면 좋을지에 대해서 설명하고자 합니다.
 <br>

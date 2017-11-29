@@ -1,0 +1,47 @@
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+
+<div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-light objcBtn">Objective-C</button>
+  <button type="button" class="btn btn-light swiftBtn">Swift</button>
+</div>
+
+<script>
+  var currentLanguage = 'swift';
+
+  $('.objcBtn').click (function () {
+    currentLanguage = 'swift';
+    toggleLanguage ();
+  })
+  
+  $('.swiftBtn').click (function () {
+    currentLanguage = 'objc';
+    toggleLanguage ();
+  })
+  
+  function changeCSSProperty (array, property, value) {
+    for (var i = 0; i < array.length; i++) {
+      $(array[i]).css(property, value);
+    }
+  }
+  
+  function toggleLanguage () {
+    if (currentLanguage == 'objc') {
+      changeCSSProperty ($('.language-objective-c').parent().parent(), 'display', 'none');
+      changeCSSProperty ($('.language-swift').parent().parent(), 'display', 'inline');
+      
+      currentLanguage = 'swift';
+    } else if (currentLanguage == 'swift') {
+      changeCSSProperty ($('.language-swift').parent().parent(), 'display', 'none');
+      changeCSSProperty ($('.language-objective-c').parent().parent(), 'display', 'inline');
+      
+      currentLanguage = 'objc';
+    }
+    
+    
+    
+    console.log (currentLanguage);
+  }
+  
+
+</script>
