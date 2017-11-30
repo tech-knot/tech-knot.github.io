@@ -4,6 +4,7 @@ title: UITableViewCell 에 (큰)이미지 사용 시, 셀이 많아질 경우 �
 date: 2017-11-29 15:50:37 +0900
 categories: blog,jekyll,github
 author: Maven Lim
+excerpt: UITableViewCell에서 이미지 사용으로 발생하는 메모리 문제에 대해 이야기합니다.
 ---
 # 문제점
 
