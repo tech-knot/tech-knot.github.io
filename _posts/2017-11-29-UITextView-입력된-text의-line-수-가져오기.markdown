@@ -12,6 +12,12 @@ CGFloat totalHeight = textView.contentSize.height + textView.textContainerInset.
 NSInteger numberOfLines = (totalHeight/caretHeight) - 1;
 {% endhighlight %}
 
+{% highlight swift %}
+let a
+let b 
+print b+c 
+{% endhighlight %}
+
 iOS 9.1에서 확인됨
 
 {% include short_profile_maven.html %}

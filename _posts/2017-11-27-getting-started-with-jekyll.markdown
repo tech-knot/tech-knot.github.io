@@ -4,6 +4,7 @@ title: Getting Started with Jekyll
 date:   2017-11-27 11:52:38 +0900
 categories: blog,jekyll,github
 author: Damien Jang
+excerpt: Jekyll을 이용해 블로그를 사용하는 방법에 대해 이야기합니다. 
 ---
 
 <style>
@@ -127,6 +128,7 @@ YAML은 데이터 중심의 직렬화 양식으로 Jekyll에서 사용하는 양
 |`published`|특정 포스트를 비공개로 처리하고 싶으면 `false`로 설정합니다|
 |`category` `categories`|포스트를 특정 디렉토리 계층에 포함시키지 않고 여러개의 카테고리에 속하도록 할 수 있습니다. 두 개 이상의 카테고리를 지정할 때는 쉼표로 구분합니다.|
 |`tags`|카테고리와 유사하며 하나 이상의 태그를 추가할 수 있습니다. 두 개 이상의 태그를 지정할 때는 쉼표로 구분합니다.|
+|`excerpt`|본문에 대한 설명을 작성합니다. 포스트 목록에서 표시되는 요약 내용입니다.|
 
 * 위의 미리 정의된 변수 외에 사용자가 임의로 변수를 지정할수도 있습니다. 
 * 변수는 Liquid 문법을 이용해 `{{ page.title }}`과 같이 사용할 수 있습니다.

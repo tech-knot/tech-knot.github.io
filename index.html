@@ -6,7 +6,6 @@ layout: page
 ---
 <!-- This loops through the paginated posts -->
 
-
 <ul class="post-list">
   {% for post in paginator.posts %}
     <li>
@@ -16,7 +15,7 @@ layout: page
         <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
       </h2>
 
-      <!-- {{ post.excerpt }} -->
+      {{ post.excerpt }}
     </li>
   {% endfor %}
 </ul>
