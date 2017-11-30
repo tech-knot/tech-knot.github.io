@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Git관리를 이렇게 합니다.
+title: Git관리를 이렇게 해요
 date:   2017-11-28 11:02:38 +0900
 categories: blog jekyll github
-excerpt: 안드로이드 프로젝트 Git관리를 어떻게 하는지에 대해서 이야기를 합니다.
+excerpt: 안드로이드 프로젝트에서 Git관리를 어떻게 하는지에 대해서 이야기를 합니다.
 ---
 안녕하세요. 오늘 애기할 주제는 안드로이드 스튜디오에서 Git 연동을 어떻게 시작하면 좋을지에 대해서 설명하고자 합니다.
 <br>
