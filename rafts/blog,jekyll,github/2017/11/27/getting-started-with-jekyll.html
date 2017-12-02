@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Getting Started with Jekyll</title>
+  <meta name="description" content="">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/blog,jekyll,github/2017/11/27/getting-started-with-jekyll.html">
+  <link rel="alternate" type="application/rss+xml" title="tech-knot" href="/feed.xml">
+  
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" href="/">tech-knot</a>
+  
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/about/">About</a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Getting Started with Jekyll</h1>
+    <p class="post-meta">
+      <time datetime="2017-11-27T11:52:38+09:00" itemprop="datePublished">
+        
+        Nov 27, 2017
+      </time>
+      
+        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Damien Jang</span></span>
+      </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <style>
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+		border: 2px solid #000000;
+	}
+	th {
+		border: 2px solid #000000;
+	}
+	td {
+		border: 1px solid #000000;
+	}
+</style>
+
+<ol id="markdown-toc">
+  <li><a href="#chapter-1---getting-started" id="markdown-toc-chapter-1---getting-started">Chapter 1 - Getting Started</a>    <ol>
+      <li><a href="#구조" id="markdown-toc-구조">구조</a></li>
+      <li><a href="#ruby-설치" id="markdown-toc-ruby-설치">Ruby 설치</a>        <ol>
+          <li><a href="#mac-os" id="markdown-toc-mac-os">Mac OS</a></li>
+          <li><a href="#windows" id="markdown-toc-windows">Windows</a></li>
+        </ol>
+      </li>
+      <li><a href="#jekyll--bundler-설치" id="markdown-toc-jekyll--bundler-설치">Jekyll &amp; Bundler 설치</a></li>
+      <li><a href="#git-저장소-클론" id="markdown-toc-git-저장소-클론">Git 저장소 클론</a></li>
+      <li><a href="#로컬에서-구동해보기" id="markdown-toc-로컬에서-구동해보기">로컬에서 구동해보기</a></li>
+      <li><a href="#사이트-접속하기" id="markdown-toc-사이트-접속하기">사이트 접속하기</a></li>
+    </ol>
+  </li>
+  <li><a href="#chapter-2---posting" id="markdown-toc-chapter-2---posting">Chapter 2 - Posting</a>    <ol>
+      <li><a href="#jekyll-구조" id="markdown-toc-jekyll-구조">Jekyll 구조</a></li>
+      <li><a href="#yaml-머리말" id="markdown-toc-yaml-머리말">YAML 머리말</a></li>
+      <li><a href="#초안-작성" id="markdown-toc-초안-작성">초안 작성</a></li>
+      <li><a href="#게시" id="markdown-toc-게시">게시</a></li>
+      <li><a href="#코드-강조" id="markdown-toc-코드-강조">코드 강조</a></li>
+    </ol>
+  </li>
+</ol>
+
+<h1 id="chapter-1---getting-started">Chapter 1 - Getting Started</h1>
+
+<p>이 챕터는 테크 블로그를 사용하기 위한 기본적인 준비단계입니다. 어떻게 블로그가 구동되는지, 어떤 기술들이 사용되는지 설명하고 최종적으로 글을 작성해볼 수 있는 단계까지 설명합니다.</p>
+<h2 id="구조">구조</h2>
+<p>Github의 무료 서비스인 Page 호스팅과 Jekyll이라는 Ruby 기반의 정적 사이트 생성기를 이용합니다. 따라서 각각의 글은 모두 Github을 통해 공개되며, Markdown 문법을 활용해 작성하면 Jekyll에 의해 정적 사이트로 조회할 수 있습니다. 사용을 위해 Jekyll의 사용법과 <a href="http://ccl.cckorea.org/syntax/">Markdown 문법</a>을 숙지하는 것이 좋습니다.</p>
+<h2 id="ruby-설치">Ruby 설치</h2>
+<p>먼저 Jekyll 설치를 위해 <a href="https://www.ruby-lang.org/ko/">Ruby</a>를 설치해야 합니다.</p>
+<h3 id="mac-os">Mac OS</h3>
+<hr />
+<p>맥 OS에는 System Ruby가 이미 설치되어 있기 때문에 추가로 루비를 설치할 필요가 없습니다. 😄</p>
+
+<h3 id="windows">Windows</h3>
+<hr />
+<p>윈도우에는 루비가 설치되어 있지 않으므로 이미 설치하지 않았다면 설치 과정이 필요합니다. 설치는 <a href="https://rubyinstaller.org/">Ruby Installer</a>를 사용하면 편리합니다.</p>
+
+<h2 id="jekyll--bundler-설치">Jekyll &amp; Bundler 설치</h2>
+<ul>
+  <li>터미널에서 아래 설치 명령어를 통해 설치할 수 있습니다.<br />
+(필요에 따라 관리자 권한을 요구할 수 있으므로 sudo 명령어를 함께 입력할 수도 있습니다)</li>
+  <li>Windows에서는 Command prompt with ruby and rails를 실행해 설치할 수 있습니다.</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nv">$ </span>gem install jekyll bundler</code></pre></figure>
+
+<h2 id="git-저장소-클론">Git 저장소 클론</h2>
+<p>블로그 구동을 위한 마무리단계입니다. 아래 블로그저장소를 클론해 작업합니다.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nv">$ </span>git clone https://github.com/tech-knot/tech-knot.github.io.git</code></pre></figure>
+
+<h2 id="로컬에서-구동해보기">로컬에서 구동해보기</h2>
+<p>다운받은 저장소로 이동 후 아래 명령어를 통해 실행해 볼 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nv">$ </span>bundler <span class="nb">exec </span>jekyll serve</code></pre></figure>
+
+<p>명령어 입력후 로컬에 서버가 구동되면 4000번 포트로 접속해 확인할 수 있습니다.</p>
+
+<p>주소창에</p>
+
+<p><code class="highlighter-rouge">http://localhost:4000</code></p>
+
+<p>또는</p>
+
+<p><code class="highlighter-rouge">http://127.0.0.1:4000</code></p>
+
+<p>를 입력해 접속할 수 있습니다.</p>
+
+<h2 id="사이트-접속하기">사이트 접속하기</h2>
+<p><a href="https://tech-knot.github.io">Appknot Tech Blog (https://tech-knot.github.io)</a>에서 확인할 수 있습니다.</p>
+
+<hr />
+
+<h1 id="chapter-2---posting">Chapter 2 - Posting</h1>
+<h2 id="jekyll-구조">Jekyll 구조</h2>
+<p>Jekyll은 아래와 같은 구조를 가지고 있습니다.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── _config.yml
+├── _drafts
+|   ├── begin-with-the-crazy-ideas.textile
+|   └── on-simplicity-in-technology.markdown
+├── _includes
+|   ├── footer.html
+|   └── header.html
+├── _layouts
+|   ├── default.html
+|   └── post.html
+├── _posts
+|   ├── 2007-10-29-why-every-programmer-should-play-nethack.textile
+|   └── 2009-04-26-barcamp-boston-4-roundup.textile
+├── _data
+|   └── members.yml
+├── _site
+├── .jekyll-metadata
+└── index.html
+</code></pre></div></div>
+<p><em>출처 : <a href="http://jekyllrb-ko.github.io/docs/structure/">Jekyll - 구조</a></em></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">파일/디렉토리</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code class="highlighter-rouge">_config.yml</code></td>
+      <td>Jekyll의 환경설정 정보를 저장합니다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="highlighter-rouge">_drafts</code></td>
+      <td>아직 게시하지 않은 포스트를 말하며 파일명 형식에 날짜가 포함되지 않습니다. 작성중인 글은 <code class="highlighter-rouge">_drafts</code>에서 작업 후 게시할 때 <code class="highlighter-rouge">_posts</code>로 이동시킵니다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="highlighter-rouge">_includes</code></td>
+      <td>재사용에 필요한 파일을 보관합니다. 필요에 따라 포스트나 레이아웃에 삽입할 수 있습니다.<br /> <code class="highlighter-rouge">{% include file.extension %}</code>와 같이 사용합니다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="highlighter-rouge">_layouts</code></td>
+      <td>각 포스트에 사용되는 템플릿을 보관합니다. 글 상단의 YAML 머리말에서 템플릿을 설정할 수 있으며 <code class="highlighter-rouge">{{ content }}</code> 와 같이 Liquid 태그로 컨텐츠를 삽입합니다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="highlighter-rouge">_posts</code></td>
+      <td>게시된 컨텐츠를 보관합니다. 파일명 명명 규칙이 존재하며 자세한 내용은 <a href="#게시">게시</a>를 참고하세요.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="highlighter-rouge">_data</code></td>
+      <td>사이트에 사용하는 데이터를 보관합니다. 예를 들어 <code class="highlighter-rouge">members.yml</code>이라는 YAML 포맷의 파일이 있다면 <code class="highlighter-rouge">site.data.members</code>를 입력해 접근할 수 있습니다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="highlighter-rouge">_site</code></td>
+      <td>Jekyll이 정적 변환을 마친 뒤 생성되는 사이트가 저장되는 기본 경로입니다. <code class="highlighter-rouge">.gitignore</code>에 추가해서 Git에 업로드 하지 않도록 합니다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">.jekyll-metadata`</td>
+      <td>Jekyll은 이 파일을 토대로 마지막 빌드 후 수정된 파일이 어떤 것인지, 재생성이 필요한 파일이 무엇인지 확인합니다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="yaml-머리말">YAML 머리말</h2>
+<p>YAML은 데이터 중심의 직렬화 양식으로 Jekyll에서 사용하는 양식입니다. 각 페이지, 포스트는 글 최상단에 YAML 머리말을 붙여야 하며 머리말에 사용할 수 있는 변수는 아래와 같습니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">변수</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code class="highlighter-rouge">layout</code></td>
+      <td>사용할 레이아웃 파일을 지정합니다. 확장자를 제외한 파일명을 입력하며 레이아웃 파일은 <code class="highlighter-rouge">_layouts</code> 디렉토리에 위치하도록 합니다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="highlighter-rouge">permalink</code></td>
+      <td>생성한 블로그 포스트 URL을 사이트 전역 스타일이 아닌 다른 스타일로 만드는데 사용합니다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="highlighter-rouge">published</code></td>
+      <td>특정 포스트를 비공개로 처리하고 싶으면 <code class="highlighter-rouge">false</code>로 설정합니다</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="highlighter-rouge">category</code> <code class="highlighter-rouge">categories</code></td>
+      <td>포스트를 특정 디렉토리 계층에 포함시키지 않고 여러개의 카테고리에 속하도록 할 수 있습니다. 두 개 이상의 카테고리를 지정할 때는 쉼표로 구분합니다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="highlighter-rouge">tags</code></td>
+      <td>카테고리와 유사하며 하나 이상의 태그를 추가할 수 있습니다. 두 개 이상의 태그를 지정할 때는 쉼표로 구분합니다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>위의 미리 정의된 변수 외에 사용자가 임의로 변수를 지정할수도 있습니다.</li>
+  <li>변수는 Liquid 문법을 이용해 <code class="highlighter-rouge">Getting Started with Jekyll</code>과 같이 사용할 수 있습니다.</li>
+  <li><strong>YAML 머리말을 작성할때는 대쉬 (-) 3개로 감싸도록 합니다</strong></li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="nn">---</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">android-post</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">Getting Started with Android Studio</span>
+<span class="na">user-defined-variable</span><span class="pi">:</span> <span class="s">This is a text sentence.</span>
+<span class="nn">---</span></code></pre></figure>
+
+<ul>
+  <li><code class="highlighter-rouge">date</code> 변수는 포스트에서만 사용할 수 있는 특별한 변수로 여기에 지정하는 날짜는 포스트의 이름에 적힌 날짜보다 우선순위가 높게 처리됩니다. 주로 포스트를 정렬하기 위해 사용하며 날짜형식은 <code class="highlighter-rouge">YYYY-MM-DD HH:MM:SS +/-TTTT</code>로 사용합니다. 시간, 분, 초와 타임존 오프셋은 선택사항입니다.</li>
+</ul>
+
+<h2 id="초안-작성">초안 작성</h2>
+<p>아직 게시하고 싶지 않은 게시물, 작성중인 게시물은 <code class="highlighter-rouge">_drafts</code> 디렉토리에 저장합니다. 파일명은 자유롭게 입력해도 좋으며 글 작성 규칙에 맞게만 작성하면 됩니다. 초안을 포함해서 블로그를 보고 싶을때는 <code class="highlighter-rouge">--drafts</code> 옵션을 추가해서 확인할 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nv">$ </span>bundler <span class="nb">exec </span>jekyll serve <span class="nt">--drafts</span></code></pre></figure>
+
+<h2 id="게시">게시</h2>
+<ul>
+  <li>글은 <strong>HTML</strong>, <strong>Markdown</strong>, <strong>Textile</strong> 문법을 지원하며 해당 문법을 지원하는 문서편집기는 자유롭게 선택하시면 됩니다.</li>
+  <li><code class="highlighter-rouge">_posts</code> 디렉토리에 글을 저장하면 온라인에 게시되며, 파일명은 다음 형식에 맞춰야 합니다.</li>
+</ul>
+
+<blockquote>
+  <p>YYYY-MM-DD-포스팅-제목.markdown</p>
+</blockquote>
+
+<ul>
+  <li>글 상단에는 항상 YAML 머리말을 작성해야 합니다.</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="nn">---</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">post</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">Blogging Like a Hacker</span>
+<span class="nn">---</span></code></pre></figure>
+
+<p><em>출처 : <a href="http://jekyllrb-ko.github.io/docs/frontmatter/">Jekyll - 머리말</a></em></p>
+
+<h2 id="코드-강조">코드 강조</h2>
+<p>Jekyll에서는 <a href="http://pygments.org/">Python 기반의 Pygments</a>나 <a href="http://rouge.jneen.net/">Rouge라는 Ruby 기반의 Code Highlighter</a>가 포함되어 있습니다. 60개가 넘는 언어를 지원하며 코드를 입력할때는 아래와 같은 포맷으로 입력하면 Code Highlighting이 적용됩니다. (시작 뒷부분에 linenos를 추가하면 코드에 줄번호를 표시할 수 있습니다)</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% highlight LANGUAGE_NAME linenos %}
+.
+.
+code 
+.
+.
+{% endhighlight %}
+</code></pre></div></div>
+<p>아래는 <strong>{% highlight c %}</strong> 와 <strong>{% endhighlight %}</strong> 사이에 Bubble sort 코드를 삽입한 결과입니다.</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="n">temp</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">6</span> <span class="p">};</span>
+<span class="kt">int</span> <span class="n">tempCount</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">hold</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">loop</span><span class="p">,</span> <span class="n">i</span><span class="p">;</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="n">loop</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">loop</span> <span class="o">&lt;</span> <span class="n">tempCount</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">loop</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">tempCount</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">loop</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">hold</span> <span class="o">=</span> <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+            <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">hold</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">tempCount</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p><em>출처 : <a href="https://ko.wikipedia.org/wiki/%EA%B1%B0%ED%92%88_%EC%A0%95%EB%A0%AC">거품정렬 - 위키백과</a></em></p>
+
+  </div>
+  
+  
+    
+
+  
+</article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">tech-knot</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              tech-knot
+            
+            </li>
+            
+            <li><a href="mailto:appknot.dev@gmail.com">appknot.dev@gmail.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/jekyll"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">jekyll</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/jekyllrb"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">jekyllrb</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-12-01T15:01:14+09:00</updated><id>http://localhost:4000/</id><title type="html">tech-knot</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">UITableViewCell 에 (큰)이미지 사용 시, 셀이 많아질 경우 메모리 문제로 크래쉬 되는 현상</title><link href="http://localhost:4000/blog,jekyll,github/2017/11/29/UITableViewCell%EC%97%90-(%ED%81%B0)%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%82%AC%EC%9A%A9-%EC%8B%9C,-%EC%85%80%EC%9D%B4-%EB%A7%8E%EC%95%84%EC%A7%88-%EA%B2%BD%EC%9A%B0-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EB%AC%B8%EC%A0%9C%EB%A1%9C-%ED%81%AC%EB%9E%98%EC%89%AC-%EB%90%98%EB%8A%94-%ED%98%84%EC%83%81.html" rel="alternate" type="text/html" title="UITableViewCell 에 (큰)이미지 사용 시, 셀이 많아질 경우 메모리 문제로 크래쉬 되는 현상" /><published>2017-11-29T15:50:37+09:00</published><updated>2017-11-29T15:50:37+09:00</updated><id>http://localhost:4000/blog,jekyll,github/2017/11/29/UITableViewCell%EC%97%90-(%ED%81%B0)%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%82%AC%EC%9A%A9-%EC%8B%9C,-%EC%85%80%EC%9D%B4-%EB%A7%8E%EC%95%84%EC%A7%88-%EA%B2%BD%EC%9A%B0-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EB%AC%B8%EC%A0%9C%EB%A1%9C-%ED%81%AC%EB%9E%98%EC%89%AC-%EB%90%98%EB%8A%94-%ED%98%84%EC%83%81</id><content type="html" xml:base="http://localhost:4000/blog,jekyll,github/2017/11/29/UITableViewCell%EC%97%90-(%ED%81%B0)%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%82%AC%EC%9A%A9-%EC%8B%9C,-%EC%85%80%EC%9D%B4-%EB%A7%8E%EC%95%84%EC%A7%88-%EA%B2%BD%EC%9A%B0-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EB%AC%B8%EC%A0%9C%EB%A1%9C-%ED%81%AC%EB%9E%98%EC%89%AC-%EB%90%98%EB%8A%94-%ED%98%84%EC%83%81.html">&lt;h1 id=&quot;문제점&quot;&gt;문제점&lt;/h1&gt;
+
+&lt;p&gt;UITableViewCell에 큰 이미지, 혹은 많은 이미지를 사용하는 경우 Cell 갯수가 많아질 때 메모리문제로 크래쉬가 일어난다.
+단순히 UITableView의 Reuse가 메모리를 알아서 관리해줄 것으로 기대하고 있지만, UITableView Reuse의 역할은, 화면에 안보이는 셀을 화면에서 제거한 후, 이를 메모리에 보관했다가 해당 Row가 다시 보여질 때 빠르게 그리는 용도이다. 따라서, Cell에 붙은 이미지들 역시 모두 메모리상에 사라지지 않고 존재하고 있으므로, 많은 Row수, 또는 이미지 크기로 인해 사용된 메모리가 임계치를 초과하는 경우 앱이 크래쉬된다.&lt;/p&gt;
+
+&lt;h1 id=&quot;해결방법&quot;&gt;해결방법&lt;/h1&gt;
+
+&lt;p&gt;UITableView에 다음과 같은 Delegate Method가 존재한다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot; data-lang=&quot;objective-c&quot;&gt;- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Cell이 화면 밖으로 나갈 때 호출되며, 인자로 해당 Cell이 전달된다. 이 메소드가 호출될 때, 즉 Cell이 화면에 보이지 않을 때 이미지를 임시로 제거하여 가용메모리를 확보한다.&lt;/p&gt;
+
+&lt;h1 id=&quot;사용예시&quot;&gt;사용예시&lt;/h1&gt;
+
+&lt;h2 id=&quot;customtablecellm&quot;&gt;CustomTableCell.m&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot; data-lang=&quot;objective-c&quot;&gt;- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier imageURL:(NSString *)imageURL
+{
+     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+     if (self) {
+          // imageURL을 멤버변수에 보관
+          _imageURLString = [[NSString alloc] initWithString:imageURL];
+
+          // 이미지 뷰 역시 멤버변수로 갖는다.
+          _thumbnailImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 8, 88, 88)];
+          [self addSubview:_thumbnailImageView];
+     }
+     return self;
+}
+
+- (void)attachImage
+{
+     [[SDWebImageManager sharedManager] downloadWithURL:[NSURL URLWithString:_imageURLString]
+                                                options:0
+                                               progress:nil
+                                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
+                                                   if (!error) {
+                                                        [_thumbnailImageView setImage:image];
+                                                   } else {
+                                                        NSLog(@&quot;error: %@&quot;, error);
+                                                   }
+                                              }];
+}
+
+- (void)detachImage
+{
+     [_thumbnailImageView setImage:nil];
+}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;parentviewcontrollerm&quot;&gt;ParentViewController.m&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot; data-lang=&quot;objective-c&quot;&gt;- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+     NSString *cellId = [NSString stringWithFormat:@&quot;Cell_%ld&quot;, indexPath.row];
+
+     CustomTableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+     if (!cell) {
+          cell = [[CustomTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId imageURL:dataArray[indexPath.row]];
+     }
+     [cell attachImage];
+
+     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+     if ([tableView.indexPathsForVisibleRows indexOfObject:indexPath] == NSNotFound) {
+          if ([cell isKindOfClass:[CustomTableCell class]]) {
+                CustomTableCell *tCell = (CustomTableCell *)cell;
+                [tCell detachImage];
+          }
+ }&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;비고&quot;&gt;비고&lt;/h1&gt;
+
+&lt;p&gt;이미지는 화면에 보일때마다 새로 그리는것이기 때문에, 해당 이미지가 로컬이 아닌 서버에 존재하는 경우 Cell이 새로 그려질때 마다 다운로드 딜레이가 생길 수 있다. 예시에서 사용한 SDWebImage 같은 라이브러리를 쓸 경우, 앱이 살아있는 동안 다운로드 받은 이미지가 기기에 캐쉬어있기 때문에 두번 째 요청부터는 로컬 이미지를 사용하여 다운로드에 발생되는 딜레이를 없앨 수 있다.&lt;/p&gt;
+
+&lt;link href=&quot;http://localhost:4000/assets/css/about.css&quot; rel=&quot;stylesheet&quot; /&gt;
+
+&lt;div class=&quot;member-area&quot;&gt;
+  &lt;div class=&quot;member-image&quot;&gt;
+  &lt;img class=&quot;profile-image&quot; src=&quot;http://localhost:4000/assets/profile_maven.png&quot; alt=&quot;slayer@appknot.com&quot; /&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;member-info&quot;&gt;
+    &lt;div class=&quot;short-info&quot;&gt;
+      &lt;span class=&quot;name&quot;&gt;&lt;a href=&quot;mailto:slayer@appknot.com&quot;&gt;Maven Lim&lt;/a&gt;&lt;/span&gt;
+      &lt;span class=&quot;sns&quot;&gt;&lt;a class=&quot;sns-icon facebook-icon&quot; href=&quot;https://facebook.com/&quot;&gt;&lt;/a&gt; &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;long-info description&quot;&gt;
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In eu mi bibendum neque egestas.
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</content><author><name>Maven Lim</name></author><summary type="html">문제점</summary></entry><entry><title type="html">UITextView 입력된 text의 line 수 가져오기</title><link href="http://localhost:4000/blog,jekyll,github/2017/11/29/UITextView-%EC%9E%85%EB%A0%A5%EB%90%9C-text%EC%9D%98-line-%EC%88%98-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0.html" rel="alternate" type="text/html" title="UITextView 입력된 text의 line 수 가져오기" /><published>2017-11-29T13:37:00+09:00</published><updated>2017-11-29T13:37:00+09:00</updated><id>http://localhost:4000/blog,jekyll,github/2017/11/29/UITextView-%EC%9E%85%EB%A0%A5%EB%90%9C-text%EC%9D%98-line-%EC%88%98-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0</id><content type="html" xml:base="http://localhost:4000/blog,jekyll,github/2017/11/29/UITextView-%EC%9E%85%EB%A0%A5%EB%90%9C-text%EC%9D%98-line-%EC%88%98-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0.html">&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot; data-lang=&quot;objective-c&quot;&gt;CGFloat caretHeight = [textView caretRectForPosition:textView.selectedTextRange.end].size.height;
+CGFloat totalHeight = textView.contentSize.height + textView.textContainerInset.top + textView.textContainerInset.bottom;
+NSInteger numberOfLines = (totalHeight/caretHeight) - 1;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;iOS 9.1에서 확인됨&lt;/p&gt;
+
+&lt;link href=&quot;http://localhost:4000/assets/css/about.css&quot; rel=&quot;stylesheet&quot; /&gt;
+
+&lt;div class=&quot;member-area&quot;&gt;
+  &lt;div class=&quot;member-image&quot;&gt;
+  &lt;img class=&quot;profile-image&quot; src=&quot;http://localhost:4000/assets/profile_maven.png&quot; alt=&quot;slayer@appknot.com&quot; /&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;member-info&quot;&gt;
+    &lt;div class=&quot;short-info&quot;&gt;
+      &lt;span class=&quot;name&quot;&gt;&lt;a href=&quot;mailto:slayer@appknot.com&quot;&gt;Maven Lim&lt;/a&gt;&lt;/span&gt;
+      &lt;span class=&quot;sns&quot;&gt;&lt;a class=&quot;sns-icon facebook-icon&quot; href=&quot;https://facebook.com/&quot;&gt;&lt;/a&gt; &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;long-info description&quot;&gt;
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In eu mi bibendum neque egestas.
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</content><author><name>Maven Lim</name></author><summary type="html">CGFloat caretHeight = [textView caretRectForPosition:textView.selectedTextRange.end].size.height; CGFloat totalHeight = textView.contentSize.height + textView.textContainerInset.top + textView.textContainerInset.bottom; NSInteger numberOfLines = (totalHeight/caretHeight) - 1;</summary></entry><entry><title type="html">Git관리를 이렇게 해요</title><link href="http://localhost:4000/blog/jekyll/github/2017/11/28/android-github%EA%B4%80%EB%A6%AC.html" rel="alternate" type="text/html" title="Git관리를 이렇게 해요" /><published>2017-11-28T11:02:38+09:00</published><updated>2017-11-28T11:02:38+09:00</updated><id>http://localhost:4000/blog/jekyll/github/2017/11/28/android-github%EA%B4%80%EB%A6%AC</id><content type="html" xml:base="http://localhost:4000/blog/jekyll/github/2017/11/28/android-github%EA%B4%80%EB%A6%AC.html">&lt;p&gt;안녕하세요. 오늘 애기할 주제는 안드로이드 스튜디오에서 Git 연동을 어떻게 시작하면 좋을지에 대해서 설명하고자 합니다.
+&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;시작에-앞서&quot;&gt;시작에 앞서..&lt;/h2&gt;
+&lt;p&gt;일단 저희 안드로이드 개발팀은 소규모로 구성되어 있습니다. 2명이서 협업을 한 프로젝트도 있지만, 대부분은 1인 1프로젝트로 진행이 됩니다.
+이전에는 Git의 사용용도를 소스 백업정도로 활용해왔습니다. Git의 여러 기능들을 활용하지 않아서 불편했던 점을 개선하고자 Git 사용법을 공부하고 전략을 세우게 되었습니다.
+&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;git-flow를-먼저-알고-가자&quot;&gt;Git-flow를 먼저 알고 가자&lt;/h2&gt;
+&lt;p&gt;Git-flow란 Git 브랜치를 효과적으로 나누고 관리하는 전략을 말합니다.
+크게 5가지의 브랜치가 있습니다.
+메인 브랜치로는 master, develop 이 있고, 임시 브랜치로는 feature, release, hotfix가 있습니다. 각 브랜치를 간략하게 설명해보겠습니다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;master: 최종본 브랜치&lt;/li&gt;
+  &lt;li&gt;develop: 개발 중인 브랜치&lt;/li&gt;
+  &lt;li&gt;feature: 기능 개발용 브랜치&lt;/li&gt;
+  &lt;li&gt;release: 이번 버전 출시용 브랜치&lt;/li&gt;
+  &lt;li&gt;hotfix: relase 후 발생한 버그 수정용 브랜치&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;아래 그림을 함께 보면 이해가 쉽습니다.&lt;/p&gt;
+
+&lt;p&gt;master브랜치로 시작을 하고, develop 브랜치를 만듭니다. develop 브랜치로 작업을 진행하다가 새로운 기능을 넣기위해 feature브랜치를 만들고 작업을 이어갑니다. (기능에 따라서 여러개의 feature브랜치가 생성됩니다.)
+기능이 완료되면 develop 브랜치로 이동해서 feature브랜치를 merge합니다. (브랜치 이동을 checkout이라고 합니다.)
+개발이 완료되고 출시를 하기위해 release브랜치를 만듭니다. QA를 진행하고, 발견된 버그 수정작업을 진행합니다.
+QA를 모두 통과한 후, release 브랜치를 develop 브랜치로 merge하고, 최종적으로 master 브랜치로 merge합니다.
+&lt;br /&gt;&lt;br /&gt;
+&lt;img src=&quot;http://3.bp.blogspot.com/-fn9dkyAGwyg/Vm2yi0CeHyI/AAAAAAAAKVY/Op31eQuKzus/s1600/gitflow_1.png&quot; alt=&quot;git-flow 설명&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;나의-git-전략&quot;&gt;나의 Git 전략&lt;/h2&gt;
+&lt;p&gt;Git을 시작하면 master브랜치만 존재합니다. 나머지 4가지의 브랜치는 임의로 생성하고 명명한 것들입니다. (develop, feature, release, hotfix)
+1인 1프로젝트이고, 개발기간이 주로 2~3개월의 기간인 소규모 프로젝트를 진행하는 입장에서 Git-flow 전략에서 제시한 5가지 브랜치를 모두 이용할 필요는 없다고 판단을 했습니다.
+메인 브랜치로 mater, develop을 사용하고, 필요에 따라서 feature브랜치를 만들어 활용하는 방법을 선택하게 되었습니다.&lt;/p&gt;
+
+&lt;p&gt;원칙적으로 feature은 하나의 기능으로 구성되어 있지만, 필요에 따라서 같은 기능이지만 구현방법에 따라 브랜치를 나눠서 작업을 할 수도 있습니다.
+A라는 기능을 구현하고자 할때, 구현방법은 다양합니다. 예를들어 3가지 방법의 구현방법이 있다고 가정해보겠습니다.
+feature-1, feature-2, feature-3 이렇게 3가지의 feature 브랜치들을 생성하고, 각기 다른 구현방법으로 구현 작업을 진행하였습니다.
+최종적으로 feature-2가 가장 좋은 구현방법이라는 결론을 내리고 feature-2를 develop로 merge시킵니다. 그리고 남아있는 3개의 feature 브랜치들은 삭제를 합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;다수의-개발자가-협업하는-방법&quot;&gt;다수의 개발자가 협업하는 방법&lt;/h2&gt;
+&lt;p&gt;협업시 업무를 분담해서 서로 다른 기능을 개발하게 됩니다. 이런 경우 상대방의 코드를 건드리거나, 오류있는 코드를 업로드하여  프로젝트를 고장나게 하면 안됩니다. 그러므로 개발 브랜치를 나눠서 작업하거나, 애초에 공통 프로젝트에서 여러갈래의 저장소로 Fork하는 방법이 있습니다.&lt;br /&gt;
+중요한것은 &lt;strong&gt;Pull Request&lt;/strong&gt; 를 사용해야 합니다. Pull Request란 말 그대로 Pull을 요청하는 것입니다. 자신의 코드를 Pull 하기 전에, 팀원들이나 개발팀장에게 먼저 물어보고, 검토를 다 받으면 그때서야 최종 Pull과 함께 Merge를 진행합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;다수의-개발자가-같은-코드를-수정하여-충돌이-나는-경우도-많다&quot;&gt;다수의 개발자가 같은 코드를 수정하여 충돌이 나는 경우도 많다.&lt;/h2&gt;
+&lt;p&gt;코드의 충돌을 방지하기 위해서는 개발자들은 최대한 작업을 나누어서 진행합니다. 그래도 코드 충돌은 날 수 있습니다.
+그럴경우에는 먼저 최초 Pull Request를 진행한 뒤에, 다음 Pull을 요청할 개발자가 코드를 받고 충돌 코드 영역을 직접 수정한 후에 Pull Request를 합니다.
+충돌 코드 부분에 대해서는 개발팀과 협의를 해서 수정해야 할 부분과 삭제해야 할 부분을 확인하는 과정도 필요합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+[출처]&lt;br /&gt;
+&lt;a href=&quot;http://www.continuousimprover.com/2015/12/why-i-am-abandoning-gitflow.html&quot;&gt;Git-Flow 그림&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://woowabros.github.io/experience/2017/10/30/baemin-mobile-git-branch-strategy.html&quot;&gt;우아한형제들 기술블로그&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://ourcstory.tistory.com/131&quot;&gt;Fork란 무엇인가&lt;/a&gt;
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;link href=&quot;http://localhost:4000/assets/css/about.css&quot; rel=&quot;stylesheet&quot; /&gt;
+
+&lt;div class=&quot;member-area&quot;&gt;
+  &lt;div class=&quot;member-image&quot;&gt;
+  &lt;img class=&quot;profile-image&quot; src=&quot;http://localhost:4000/assets/profile_gil.png&quot; alt=&quot;story9076@appknot.com&quot; /&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;member-info&quot;&gt;
+    &lt;div class=&quot;short-info&quot;&gt;
+      &lt;span class=&quot;name&quot;&gt;&lt;a href=&quot;mailto:story9076@appknot.com&quot;&gt;Gil Kim&lt;/a&gt;&lt;/span&gt;
+      &lt;span class=&quot;sns&quot;&gt;&lt;a class=&quot;sns-icon facebook-icon&quot; href=&quot;https://facebook.com/&quot;&gt;&lt;/a&gt; &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;long-info description&quot;&gt;
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In eu mi bibendum neque egestas.
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Gil Kim</name></author><summary type="html">안드로이드 프로젝트에서 Git관리를 어떻게 하는지에 대해서 이야기를 합니다.</summary></entry><entry><title type="html">Getting Started with Jekyll</title><link href="http://localhost:4000/blog,jekyll,github/2017/11/27/getting-started-with-jekyll.html" rel="alternate" type="text/html" title="Getting Started with Jekyll" /><published>2017-11-27T11:52:38+09:00</published><updated>2017-11-27T11:52:38+09:00</updated><id>http://localhost:4000/blog,jekyll,github/2017/11/27/getting-started-with-jekyll</id><content type="html" xml:base="http://localhost:4000/blog,jekyll,github/2017/11/27/getting-started-with-jekyll.html">&lt;style&gt;
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+		border: 2px solid #000000;
+	}
+	th {
+		border: 2px solid #000000;
+	}
+	td {
+		border: 1px solid #000000;
+	}
+&lt;/style&gt;
+
+&lt;ol id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#chapter-1---getting-started&quot; id=&quot;markdown-toc-chapter-1---getting-started&quot;&gt;Chapter 1 - Getting Started&lt;/a&gt;    &lt;ol&gt;
+      &lt;li&gt;&lt;a href=&quot;#구조&quot; id=&quot;markdown-toc-구조&quot;&gt;구조&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#ruby-설치&quot; id=&quot;markdown-toc-ruby-설치&quot;&gt;Ruby 설치&lt;/a&gt;        &lt;ol&gt;
+          &lt;li&gt;&lt;a href=&quot;#mac-os&quot; id=&quot;markdown-toc-mac-os&quot;&gt;Mac OS&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#windows&quot; id=&quot;markdown-toc-windows&quot;&gt;Windows&lt;/a&gt;&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#jekyll--bundler-설치&quot; id=&quot;markdown-toc-jekyll--bundler-설치&quot;&gt;Jekyll &amp;amp; Bundler 설치&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#git-저장소-클론&quot; id=&quot;markdown-toc-git-저장소-클론&quot;&gt;Git 저장소 클론&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#로컬에서-구동해보기&quot; id=&quot;markdown-toc-로컬에서-구동해보기&quot;&gt;로컬에서 구동해보기&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#사이트-접속하기&quot; id=&quot;markdown-toc-사이트-접속하기&quot;&gt;사이트 접속하기&lt;/a&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#chapter-2---posting&quot; id=&quot;markdown-toc-chapter-2---posting&quot;&gt;Chapter 2 - Posting&lt;/a&gt;    &lt;ol&gt;
+      &lt;li&gt;&lt;a href=&quot;#jekyll-구조&quot; id=&quot;markdown-toc-jekyll-구조&quot;&gt;Jekyll 구조&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#yaml-머리말&quot; id=&quot;markdown-toc-yaml-머리말&quot;&gt;YAML 머리말&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#초안-작성&quot; id=&quot;markdown-toc-초안-작성&quot;&gt;초안 작성&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#게시&quot; id=&quot;markdown-toc-게시&quot;&gt;게시&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#코드-강조&quot; id=&quot;markdown-toc-코드-강조&quot;&gt;코드 강조&lt;/a&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;chapter-1---getting-started&quot;&gt;Chapter 1 - Getting Started&lt;/h1&gt;
+
+&lt;p&gt;이 챕터는 테크 블로그를 사용하기 위한 기본적인 준비단계입니다. 어떻게 블로그가 구동되는지, 어떤 기술들이 사용되는지 설명하고 최종적으로 글을 작성해볼 수 있는 단계까지 설명합니다.&lt;/p&gt;
+&lt;h2 id=&quot;구조&quot;&gt;구조&lt;/h2&gt;
+&lt;p&gt;Github의 무료 서비스인 Page 호스팅과 Jekyll이라는 Ruby 기반의 정적 사이트 생성기를 이용합니다. 따라서 각각의 글은 모두 Github을 통해 공개되며, Markdown 문법을 활용해 작성하면 Jekyll에 의해 정적 사이트로 조회할 수 있습니다. 사용을 위해 Jekyll의 사용법과 &lt;a href=&quot;http://ccl.cckorea.org/syntax/&quot;&gt;Markdown 문법&lt;/a&gt;을 숙지하는 것이 좋습니다.&lt;/p&gt;
+&lt;h2 id=&quot;ruby-설치&quot;&gt;Ruby 설치&lt;/h2&gt;
+&lt;p&gt;먼저 Jekyll 설치를 위해 &lt;a href=&quot;https://www.ruby-lang.org/ko/&quot;&gt;Ruby&lt;/a&gt;를 설치해야 합니다.&lt;/p&gt;
+&lt;h3 id=&quot;mac-os&quot;&gt;Mac OS&lt;/h3&gt;
+&lt;hr /&gt;
+&lt;p&gt;맥 OS에는 System Ruby가 이미 설치되어 있기 때문에 추가로 루비를 설치할 필요가 없습니다. 😄&lt;/p&gt;
+
+&lt;h3 id=&quot;windows&quot;&gt;Windows&lt;/h3&gt;
+&lt;hr /&gt;
+&lt;p&gt;윈도우에는 루비가 설치되어 있지 않으므로 이미 설치하지 않았다면 설치 과정이 필요합니다. 설치는 &lt;a href=&quot;https://rubyinstaller.org/&quot;&gt;Ruby Installer&lt;/a&gt;를 사용하면 편리합니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;jekyll--bundler-설치&quot;&gt;Jekyll &amp;amp; Bundler 설치&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;터미널에서 아래 설치 명령어를 통해 설치할 수 있습니다.&lt;br /&gt;
+(필요에 따라 관리자 권한을 요구할 수 있으므로 sudo 명령어를 함께 입력할 수도 있습니다)&lt;/li&gt;
+  &lt;li&gt;Windows에서는 Command prompt with ruby and rails를 실행해 설치할 수 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem install jekyll bundler&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;git-저장소-클론&quot;&gt;Git 저장소 클론&lt;/h2&gt;
+&lt;p&gt;블로그 구동을 위한 마무리단계입니다. 아래 블로그저장소를 클론해 작업합니다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git clone https://github.com/tech-knot/tech-knot.github.io.git&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;로컬에서-구동해보기&quot;&gt;로컬에서 구동해보기&lt;/h2&gt;
+&lt;p&gt;다운받은 저장소로 이동 후 아래 명령어를 통해 실행해 볼 수 있습니다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundler &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;명령어 입력후 로컬에 서버가 구동되면 4000번 포트로 접속해 확인할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;주소창에&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:4000&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;또는&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;http://127.0.0.1:4000&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;를 입력해 접속할 수 있습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;사이트-접속하기&quot;&gt;사이트 접속하기&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://tech-knot.github.io&quot;&gt;Appknot Tech Blog (https://tech-knot.github.io)&lt;/a&gt;에서 확인할 수 있습니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;chapter-2---posting&quot;&gt;Chapter 2 - Posting&lt;/h1&gt;
+&lt;h2 id=&quot;jekyll-구조&quot;&gt;Jekyll 구조&lt;/h2&gt;
+&lt;p&gt;Jekyll은 아래와 같은 구조를 가지고 있습니다.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.
+├── _config.yml
+├── _drafts
+|   ├── begin-with-the-crazy-ideas.textile
+|   └── on-simplicity-in-technology.markdown
+├── _includes
+|   ├── footer.html
+|   └── header.html
+├── _layouts
+|   ├── default.html
+|   └── post.html
+├── _posts
+|   ├── 2007-10-29-why-every-programmer-should-play-nethack.textile
+|   └── 2009-04-26-barcamp-boston-4-roundup.textile
+├── _data
+|   └── members.yml
+├── _site
+├── .jekyll-metadata
+└── index.html
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;출처 : &lt;a href=&quot;http://jekyllrb-ko.github.io/docs/structure/&quot;&gt;Jekyll - 구조&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;파일/디렉토리&lt;/th&gt;
+      &lt;th&gt;설명&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Jekyll의 환경설정 정보를 저장합니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;_drafts&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;아직 게시하지 않은 포스트를 말하며 파일명 형식에 날짜가 포함되지 않습니다. 작성중인 글은 &lt;code class=&quot;highlighter-rouge&quot;&gt;_drafts&lt;/code&gt;에서 작업 후 게시할 때 &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt;로 이동시킵니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;_includes&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;재사용에 필요한 파일을 보관합니다. 필요에 따라 포스트나 레이아웃에 삽입할 수 있습니다.&lt;br /&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;{% include file.extension %}&lt;/code&gt;와 같이 사용합니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;_layouts&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;각 포스트에 사용되는 템플릿을 보관합니다. 글 상단의 YAML 머리말에서 템플릿을 설정할 수 있으며 &lt;code class=&quot;highlighter-rouge&quot;&gt;{{ content }}&lt;/code&gt; 와 같이 Liquid 태그로 컨텐츠를 삽입합니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;게시된 컨텐츠를 보관합니다. 파일명 명명 규칙이 존재하며 자세한 내용은 &lt;a href=&quot;#게시&quot;&gt;게시&lt;/a&gt;를 참고하세요.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;_data&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;사이트에 사용하는 데이터를 보관합니다. 예를 들어 &lt;code class=&quot;highlighter-rouge&quot;&gt;members.yml&lt;/code&gt;이라는 YAML 포맷의 파일이 있다면 &lt;code class=&quot;highlighter-rouge&quot;&gt;site.data.members&lt;/code&gt;를 입력해 접근할 수 있습니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;_site&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Jekyll이 정적 변환을 마친 뒤 생성되는 사이트가 저장되는 기본 경로입니다. &lt;code class=&quot;highlighter-rouge&quot;&gt;.gitignore&lt;/code&gt;에 추가해서 Git에 업로드 하지 않도록 합니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;.jekyll-metadata`&lt;/td&gt;
+      &lt;td&gt;Jekyll은 이 파일을 토대로 마지막 빌드 후 수정된 파일이 어떤 것인지, 재생성이 필요한 파일이 무엇인지 확인합니다.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;yaml-머리말&quot;&gt;YAML 머리말&lt;/h2&gt;
+&lt;p&gt;YAML은 데이터 중심의 직렬화 양식으로 Jekyll에서 사용하는 양식입니다. 각 페이지, 포스트는 글 최상단에 YAML 머리말을 붙여야 하며 머리말에 사용할 수 있는 변수는 아래와 같습니다.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;변수&lt;/th&gt;
+      &lt;th&gt;설명&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;layout&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;사용할 레이아웃 파일을 지정합니다. 확장자를 제외한 파일명을 입력하며 레이아웃 파일은 &lt;code class=&quot;highlighter-rouge&quot;&gt;_layouts&lt;/code&gt; 디렉토리에 위치하도록 합니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;permalink&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;생성한 블로그 포스트 URL을 사이트 전역 스타일이 아닌 다른 스타일로 만드는데 사용합니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;published&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;특정 포스트를 비공개로 처리하고 싶으면 &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;로 설정합니다&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;category&lt;/code&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;categories&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;포스트를 특정 디렉토리 계층에 포함시키지 않고 여러개의 카테고리에 속하도록 할 수 있습니다. 두 개 이상의 카테고리를 지정할 때는 쉼표로 구분합니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tags&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;카테고리와 유사하며 하나 이상의 태그를 추가할 수 있습니다. 두 개 이상의 태그를 지정할 때는 쉼표로 구분합니다.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;위의 미리 정의된 변수 외에 사용자가 임의로 변수를 지정할수도 있습니다.&lt;/li&gt;
+  &lt;li&gt;변수는 Liquid 문법을 이용해 &lt;code class=&quot;highlighter-rouge&quot;&gt;Getting Started with Jekyll&lt;/code&gt;과 같이 사용할 수 있습니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;YAML 머리말을 작성할때는 대쉬 (-) 3개로 감싸도록 합니다&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;layout&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;android-post&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Getting Started with Android Studio&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;user-defined-variable&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;This is a text sentence.&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;date&lt;/code&gt; 변수는 포스트에서만 사용할 수 있는 특별한 변수로 여기에 지정하는 날짜는 포스트의 이름에 적힌 날짜보다 우선순위가 높게 처리됩니다. 주로 포스트를 정렬하기 위해 사용하며 날짜형식은 &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD HH:MM:SS +/-TTTT&lt;/code&gt;로 사용합니다. 시간, 분, 초와 타임존 오프셋은 선택사항입니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;초안-작성&quot;&gt;초안 작성&lt;/h2&gt;
+&lt;p&gt;아직 게시하고 싶지 않은 게시물, 작성중인 게시물은 &lt;code class=&quot;highlighter-rouge&quot;&gt;_drafts&lt;/code&gt; 디렉토리에 저장합니다. 파일명은 자유롭게 입력해도 좋으며 글 작성 규칙에 맞게만 작성하면 됩니다. 초안을 포함해서 블로그를 보고 싶을때는 &lt;code class=&quot;highlighter-rouge&quot;&gt;--drafts&lt;/code&gt; 옵션을 추가해서 확인할 수 있습니다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundler &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve &lt;span class=&quot;nt&quot;&gt;--drafts&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;게시&quot;&gt;게시&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;글은 &lt;strong&gt;HTML&lt;/strong&gt;, &lt;strong&gt;Markdown&lt;/strong&gt;, &lt;strong&gt;Textile&lt;/strong&gt; 문법을 지원하며 해당 문법을 지원하는 문서편집기는 자유롭게 선택하시면 됩니다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; 디렉토리에 글을 저장하면 온라인에 게시되며, 파일명은 다음 형식에 맞춰야 합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;YYYY-MM-DD-포스팅-제목.markdown&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;글 상단에는 항상 YAML 머리말을 작성해야 합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;layout&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;post&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Blogging Like a Hacker&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;em&gt;출처 : &lt;a href=&quot;http://jekyllrb-ko.github.io/docs/frontmatter/&quot;&gt;Jekyll - 머리말&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;코드-강조&quot;&gt;코드 강조&lt;/h2&gt;
+&lt;p&gt;Jekyll에서는 &lt;a href=&quot;http://pygments.org/&quot;&gt;Python 기반의 Pygments&lt;/a&gt;나 &lt;a href=&quot;http://rouge.jneen.net/&quot;&gt;Rouge라는 Ruby 기반의 Code Highlighter&lt;/a&gt;가 포함되어 있습니다. 60개가 넘는 언어를 지원하며 코드를 입력할때는 아래와 같은 포맷으로 입력하면 Code Highlighting이 적용됩니다. (시작 뒷부분에 linenos를 추가하면 코드에 줄번호를 표시할 수 있습니다)&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{% highlight LANGUAGE_NAME linenos %}
+.
+.
+code 
+.
+.
+{% endhighlight %}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;아래는 &lt;strong&gt;{% highlight c %}&lt;/strong&gt; 와 &lt;strong&gt;{% endhighlight %}&lt;/strong&gt; 사이에 Bubble sort 코드를 삽입한 결과입니다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tempCount&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hold&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loop&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;loop&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tempCount&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tempCount&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;hold&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hold&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tempCount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;%d&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;em&gt;출처 : &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EA%B1%B0%ED%92%88_%EC%A0%95%EB%A0%AC&quot;&gt;거품정렬 - 위키백과&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;</content><author><name>Damien Jang</name></author><summary type="html"></summary></entry></feed>

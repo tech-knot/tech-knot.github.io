@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Blogging Like a Hacker</title>
+  <meta name="description" content="">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/2017/11/27/start-guide.html">
+  <link rel="alternate" type="application/rss+xml" title="Your awesome title" href="/feed.xml">
+  
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" href="/">Your awesome title</a>
+  
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/about/">About</a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Blogging Like a Hacker</h1>
+    <p class="post-meta">
+      <time datetime="2017-11-27T17:19:59+09:00" itemprop="datePublished">
+        
+        Nov 27, 2017
+      </time>
+      </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+<ul>
+  <li><a href="#chapter-1-getting-started">Chapter 1 - Getting Started</a>
+    <ul>
+      <li><a href="#">구조</a></li>
+      <li><a href="#ruby-">Ruby 설치</a>
+        <ul>
+          <li><a href="#mac-os">Mac OS</a></li>
+          <li><a href="#windows">Windows</a></li>
+        </ul>
+      </li>
+      <li><a href="#jekyll-bundler-">Jekyll &amp; Bundler 설치</a></li>
+      <li><a href="#git-">Git 저장소 클론</a></li>
+      <li><a href="#-">로컬에서 구동해보기</a></li>
+      <li><a href="#-">사이트 접속하기</a></li>
+    </ul>
+  </li>
+  <li><a href="#chapter-2-posting">Chapter 2 - Posting</a>
+    <ul>
+      <li><a href="#">구조</a></li>
+      <li><a href="#-">글 작성</a></li>
+    </ul>
+  </li>
+</ul>
+
+<!-- /TOC -->
+
+<h1 id="chapter-1---getting-started">Chapter 1 - Getting Started</h1>
+<p>이 챕터에서는 테크 블로그를 사용하기 위한 기본적인 준비단계입니다. 어떻게 블로그가 구동되는지, 어떤 기술들이 사용되는지 설명하고 최종적으로 글을 작성해볼 수 있는 단계까지 설명합니다.</p>
+<h2 id="구조">구조</h2>
+<p>Github의 무료 서비스인 Page호스팅과 Jekyll이라는 Ruby 기반의 정적 사이트 생성기를 이용합니다. 따라서 각각의 글은 모두 Github에 공개되어 있으며, Markdown 문법을 활용해 작성하면 Jekyll에 의해 정적 사이트로 열람할 수 있습니다. 사용을 위해 Jekyll의 사용법과 Markdown 문법을 숙지하는 것이 좋습니다.</p>
+<h2 id="ruby-설치">Ruby 설치</h2>
+<p>사용을 위해서는 <a href="https://www.ruby-lang.org/ko/">Ruby</a>를 설치해야 합니다.</p>
+<h3 id="mac-os">Mac OS</h3>
+<hr />
+<p>맥 OS에는 System Ruby가 이미 설치되어 있기 때문에 추가로 루비를 설치할 필요가 없습니다.</p>
+
+<h3 id="windows">Windows</h3>
+<hr />
+<p>윈도우에는 루비가 설치되어 있지 않으므로 이미 설치하지 않았다면 설치 과정이 필요합니다. 설치는 <a href="https://rubyinstaller.org/">Ruby Installer</a>를 사용하면 편리합니다.</p>
+
+<h2 id="jekyll--bundler-설치">Jekyll &amp; Bundler 설치</h2>
+<ul>
+  <li>터미널에서 아래 설치 명령어를 통해 설치할 수 있습니다.<br />
+(필요에 따라 관리자 권한을 요구할 수 있으므로 sudo 명령어를 함께 입력할 수도 있습니다)</li>
+  <li>Windows에서는 CommandLine With Ruby를 실행해 아래 설치 명령어를 통해 설치할 수 있습니다.
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gem install jekyll bundler
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="git-저장소-클론">Git 저장소 클론</h2>
+<p>블로그 구동을 위한 마무리단계입니다. 아래 블로그저장소를 클론합니다.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clone https://github.com/tech-knot/tech-knot.github.io.git
+</code></pre></div></div>
+
+<h2 id="로컬에서-구동해보기">로컬에서 구동해보기</h2>
+<p>다운받은 저장소로 이동 후 아래 명령어를 통해 실행해 볼 수 있습니다.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ bundler exec jekyll serve
+</code></pre></div></div>
+<p>명령어 입력후 로컬에 서버가 구동되면 4000번 포트로 접속해 확인할 수 있습니다.</p>
+
+<p>주소창에</p>
+
+<p><code class="highlighter-rouge">http://localhost:4000</code></p>
+
+<p>또는</p>
+
+<p><code class="highlighter-rouge">http://127.0.0.1:4000</code></p>
+
+<p>를 입력해 접속할 수 있습니다.</p>
+
+<h2 id="사이트-접속하기">사이트 접속하기</h2>
+<p><a href="https://tech-knot.github.io">Appknot Tech Blog (https://tech-knot.github.io)</a>에서 확인할 수 있습니다.</p>
+
+<h1 id="chapter-2---posting">Chapter 2 - Posting</h1>
+<h2 id="구조-1">구조</h2>
+<p>Jekyll은 아래와 같은 구조를 가지고 있습니다.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── _config.yml
+├── _drafts
+|   ├── begin-with-the-crazy-ideas.textile
+|   └── on-simplicity-in-technology.markdown
+├── _includes
+|   ├── footer.html
+|   └── header.html
+├── _layouts
+|   ├── default.html
+|   └── post.html
+├── _posts
+|   ├── 2007-10-29-why-every-programmer-should-play-nethack.textile
+|   └── 2009-04-26-barcamp-boston-4-roundup.textile
+├── _data
+|   └── members.yml
+├── _site
+├── .jekyll-metadata
+└── index.html
+</code></pre></div></div>
+<p><em>출처 : <a href="http://jekyllrb-ko.github.io/docs/structure/">Jekyll - 구조</a></em></p>
+
+<h2 id="초안-작성">초안 작성</h2>
+<p>아직 게시하고 싶지 않은 게시물, 작성중인 게시물은 <code class="highlighter-rouge">_drafts</code> 디렉토리에 저장합니다. 파일명은 자유롭게 입력해도 좋으며 글 작성 규칙에 맞게만 작성하면 됩니다. 초안을 포함해서 블로그를 보고 싶을때는 <code class="highlighter-rouge">--drafts</code> 옵션을 추가해서 확인할 수 있습니다.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ bundler exec jekyll serve --drafts
+</code></pre></div></div>
+
+<h2 id="게시">게시</h2>
+<ul>
+  <li>글은 <strong>HTML</strong>, <strong>Markdown</strong>, <strong>Textile</strong> 문법을 지원하며 해당 문법을 지원하는 문서편집기는 자유롭게 선택하시면 됩니다.</li>
+  <li><code class="highlighter-rouge">_posts</code> 디렉토리에 글을 저장하면 온라인에 게시되며, 파일명은 다음 형식에 맞춰야 합니다.
+    <blockquote>
+      <p>YYYY-MM-DD-포스팅-제목.markdown</p>
+    </blockquote>
+  </li>
+  <li>글 상단에는 항상 YAML 머리말을 작성해야 합니다.</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+layout: post
+title: Blogging Like a Hacker
+---
+</code></pre></div></div>
+<p><em>출처 : <a href="http://jekyllrb-ko.github.io/docs/frontmatter/">Jekyll - 머리말</a></em></p>
+
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    test footer
+
+
+  </body>
+
+</html>
