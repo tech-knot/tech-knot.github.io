@@ -3,7 +3,7 @@ layout: post
 title: Jekyll 블로그에 댓글 구현하기
 date:   2017-11-28 11:02:38 +0900
 categories: blog jekyll github
-excerpt: 안드로이드 프로젝트에서 Git관리를 어떻게 하는지에 대해서 이야기를 합니다.
+excerpt: Jekyll 블로그에 댓글 서비스인 Disqus를 연동하는 방법을 설명합니다.
 author: Gil Kim
 ---
 Jekyll 블로그는 정적 페이지 입니다. 동적 요소인 댓글 구현을 위해 Disqus 서비스를 많이 이용합니다.
@@ -78,7 +78,7 @@ s.setAttribute('data-timestamp', +new Date());
 <br>
 *출처: [Universal Embed Code란](https://help.disqus.com/customer/portal/articles/472097-universal-embed-code)*
 
-<br>
+<br>    
 {% include short_profile_gil.html %}
 
 {% include disqus.html %}
