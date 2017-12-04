@@ -34,7 +34,7 @@ user-defined-variable: This is a text sentence.
 {% endhighlight %}
 
 <br>
- **<2>** Disqus를 로드할 **Universal Embeded Code** 를 붙여 넣으면 된다.
+ **<2>** Disqus를 로드할 **Universal Embeded Code** 를 작성합니다.
 
 
 ```
