@@ -13,9 +13,92 @@ permalink: /about/
 
 ## 사람들
 
-{% include short_profile_armand.html %}
-{% include short_profile_alex.html %}
-{% include short_profile_gil.html %}
-{% include short_profile_maven.html %}
-{% include short_profile_damien.html %}
-{% include short_profile_lucy.html %}
+<div class="member-area" >
+  <div class="member-image">
+    <img class="profile-image" src="{{ site.url }}/assets/profile_armand.png"  alt="tereby@appknot.com" />
+  </div>
+  <div class="member-info">
+    <div class="short-info">
+      <span class="name"><a href="mailto:tereby@appknot.com">Armand Oh</a></span>
+      <span class="sns"><a class="sns-icon facebook-icon" href="https://facebook.com/"></a></span>
+    </div>
+    <div class="long-info description">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices eros in cursus turpis massa tincidunt dui ut.
+    </div>
+  </div>
+</div>
+
+<div class="member-area">
+  <div class="member-image">
+  <img class="profile-image" src="{{ site.url }}/assets/profile_alex.png"  alt="cerebrate369@appknot.com" />
+  </div>
+  <div class="member-info">
+    <div class="short-info">
+      <span class="name"><a href="cerebrate369@appknot.com">Alex Ji</a></span>
+      <span class="sns"><a class="sns-icon facebook-icon" href="https://facebook.com/"></a> </span>
+    </div>
+    <div class="long-info description">
+      총을 좋아합니다.
+    </div>
+  </div>
+</div>
+
+<div class="member-area">
+  <div class="member-image">
+  <img class="profile-image" src="{{ site.url }}/assets/profile_gil.png"  alt="story9076@appknot.com" />
+  </div>
+  <div class="member-info">
+    <div class="short-info">
+      <span class="name"><a href="mailto:story9076@appknot.com">Gil Kim</a></span>
+      <span class="sns"><a class="sns-icon facebook-icon" href="https://facebook.com/"></a> </span>
+    </div>
+    <div class="long-info description">
+      성동구민체육센터 수영 중급반인 안드로이드 개발자입니다.
+    </div>
+  </div>
+</div>
+
+<div class="member-area">
+  <div class="member-image">
+  <img class="profile-image" src="{{ site.url }}/assets/profile_maven.png"  alt="slayer@appknot.com" />
+  </div>
+  <div class="member-info">
+    <div class="short-info">
+      <span class="name"><a href="mailto:slayer@appknot.com">Maven Lim</a></span>
+      <span class="sns"><a class="sns-icon facebook-icon" href="https://facebook.com/"></a> </span>
+    </div>
+    <div class="long-info description">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Feugiat nisl pretium fusce id.
+    </div>
+  </div>
+</div>
+
+<div class="member-area">
+  <div class="member-image">
+  <img class="profile-image" src="{{ site.url }}/assets/profile_damien.png"  alt="tereby@appknot.com" />
+  </div>
+  <div class="member-info">
+    <div class="short-info">
+      <span class="name"><a href="mailto:tereby@appknot.com">Damien Jang</a></span>
+      <span class="sns"><a class="sns-icon facebook-icon" href="https://facebook.com/"></a> </span>
+    </div>
+    <div class="long-info description">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi sit amet mauris commodo quis imperdiet massa tincidunt.
+    </div>
+  </div>
+</div>
+
+<div class="member-area">
+  <div class="member-image">
+  <img class="profile-image" src="{{ site.url }}/assets/profile_lucy.png"  alt="sej0518@appknot.com" />
+  </div>
+  <div class="member-info">
+    <div class="short-info">
+      <span class="name"><a href="mailto:sej0518@appknot.com">Lucy Song</a></span>
+      <span class="sns"><a class="sns-icon facebook-icon" href="https://facebook.com/"></a> </span>
+    </div>
+    <div class="long-info description">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam sollicitudin tempor id eu nisl nunc.
+    </div>
+  </div>
+</div>
