@@ -4,6 +4,7 @@ title: Jekyll 블로그에 댓글 구현하기
 date:   2017-11-28 11:02:38 +0900
 categories: blog jekyll github
 excerpt: Jekyll 블로그에 댓글 서비스인 Disqus를 연동하는 방법을 설명합니다.
+comments: true
 author: Gil Kim
 ---
 Jekyll 블로그는 정적 페이지 입니다. 동적 요소인 댓글 구현을 위해 Disqus 서비스를 많이 이용합니다.
@@ -30,6 +31,7 @@ WebSite Name과 Category 를 선택하여 입력합니다. (WebSite Name 예시:
 {% highlight YAML %}
 layout: android-post
 title: Getting Started with Android Studio
+comments: true
 user-defined-variable: This is a text sentence.
 {% endhighlight %}
 
