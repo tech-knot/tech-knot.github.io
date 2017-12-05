@@ -9,7 +9,7 @@ permalink: /about/
 ---
 
 안녕하세요. 이 블로그는 디지털 솔루션을 개발하는 앱노트의 기술직원들이 운영하는 기술블로그입니다.  
-앱노트가 배운것을 사람들과 공유하려 합니다. 
+앱노트가 배운것을 사람들과 공유하려 합니다.
 
 ## 사람들
 
@@ -38,7 +38,7 @@ permalink: /about/
       <span class="sns"><a class="sns-icon facebook-icon" href="https://facebook.com/"></a> </span>
     </div>
     <div class="long-info description">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pretium fusce id velit ut tortor pretium.
+      총을 좋아합니다.
     </div>
   </div>
 </div>
@@ -53,7 +53,7 @@ permalink: /about/
       <span class="sns"><a class="sns-icon facebook-icon" href="https://facebook.com/"></a> </span>
     </div>
     <div class="long-info description">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In eu mi bibendum neque egestas.
+      성동구민체육센터 수영 중급반인 안드로이드 개발자입니다.
     </div>
   </div>
 </div>
