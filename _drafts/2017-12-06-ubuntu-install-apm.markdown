@@ -90,3 +90,9 @@ $ sudo /etc/init.d/apache2 restart
 {% endhighlight %}
 <br>
 <br>
+
+{% include short_profile_lucy.html %}
+
+{% include disqus.html %}
+
+<br>
