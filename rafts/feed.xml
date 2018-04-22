@@ -1,4 +1,94 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-12-01T15:01:14+09:00</updated><id>http://localhost:4000/</id><title type="html">tech-knot</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">UITableViewCell 에 (큰)이미지 사용 시, 셀이 많아질 경우 메모리 문제로 크래쉬 되는 현상</title><link href="http://localhost:4000/blog,jekyll,github/2017/11/29/UITableViewCell%EC%97%90-(%ED%81%B0)%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%82%AC%EC%9A%A9-%EC%8B%9C,-%EC%85%80%EC%9D%B4-%EB%A7%8E%EC%95%84%EC%A7%88-%EA%B2%BD%EC%9A%B0-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EB%AC%B8%EC%A0%9C%EB%A1%9C-%ED%81%AC%EB%9E%98%EC%89%AC-%EB%90%98%EB%8A%94-%ED%98%84%EC%83%81.html" rel="alternate" type="text/html" title="UITableViewCell 에 (큰)이미지 사용 시, 셀이 많아질 경우 메모리 문제로 크래쉬 되는 현상" /><published>2017-11-29T15:50:37+09:00</published><updated>2017-11-29T15:50:37+09:00</updated><id>http://localhost:4000/blog,jekyll,github/2017/11/29/UITableViewCell%EC%97%90-(%ED%81%B0)%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%82%AC%EC%9A%A9-%EC%8B%9C,-%EC%85%80%EC%9D%B4-%EB%A7%8E%EC%95%84%EC%A7%88-%EA%B2%BD%EC%9A%B0-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EB%AC%B8%EC%A0%9C%EB%A1%9C-%ED%81%AC%EB%9E%98%EC%89%AC-%EB%90%98%EB%8A%94-%ED%98%84%EC%83%81</id><content type="html" xml:base="http://localhost:4000/blog,jekyll,github/2017/11/29/UITableViewCell%EC%97%90-(%ED%81%B0)%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%82%AC%EC%9A%A9-%EC%8B%9C,-%EC%85%80%EC%9D%B4-%EB%A7%8E%EC%95%84%EC%A7%88-%EA%B2%BD%EC%9A%B0-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EB%AC%B8%EC%A0%9C%EB%A1%9C-%ED%81%AC%EB%9E%98%EC%89%AC-%EB%90%98%EB%8A%94-%ED%98%84%EC%83%81.html">&lt;h1 id=&quot;문제점&quot;&gt;문제점&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-04-15T14:04:18+09:00</updated><id>http://localhost:4000/</id><title type="html">tech-knot</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Ubuntu 16.04 에서 기본적인 APM(Apache+PHP+MariaDB) 설치하기</title><link href="http://localhost:4000/blog/jekyll/github/2017/12/06/ubuntu-install-apm.html" rel="alternate" type="text/html" title="Ubuntu 16.04 에서 기본적인 APM(Apache+PHP+MariaDB) 설치하기" /><published>2017-12-06T15:11:01+09:00</published><updated>2017-12-06T15:11:01+09:00</updated><id>http://localhost:4000/blog/jekyll/github/2017/12/06/ubuntu-install-apm</id><content type="html" xml:base="http://localhost:4000/blog/jekyll/github/2017/12/06/ubuntu-install-apm.html">&lt;h2 id=&quot;패키지-설치전&quot;&gt;패키지 설치전&lt;/h2&gt;
+&lt;p&gt;저장소 패키지 목록을 업데이트를 해줍니다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-update&quot; data-lang=&quot;update&quot;&gt;$ sudo apt-get update&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;기존에 설치되어 있던 패키지를 업데이트 합니다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-upgrade&quot; data-lang=&quot;upgrade&quot;&gt;$ sudo apt-get upgrade&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;apache&quot;&gt;Apache&lt;/h2&gt;
+&lt;p&gt;웹 서버로 Apache2를 설치합니다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-install&quot; data-lang=&quot;install&quot;&gt;$ sudo apt-get install apache2&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Apache 실행&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-install&quot; data-lang=&quot;install&quot;&gt;$ sudo service apache2 start&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Apache 재시작&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-install&quot; data-lang=&quot;install&quot;&gt;$ sudo /etc/init.d/apache2 restart&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;루트 기본 디렉토리 변경&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-install&quot; data-lang=&quot;install&quot;&gt;$ sudo vi /etc/apache2/sites-available/000-default.conf    
+  =&amp;gt;  DocumentRoot /var/www/html 수정
+$ sudo vi /etc/apache2/apache2.conf
+  =&amp;gt; &amp;lt;Directory /var/www/html&amp;gt; 수정
+
+$ sudo /etc/init.d/apache2 restart&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;mariadb&quot;&gt;MariaDB&lt;/h2&gt;
+&lt;p&gt;RDBMS는 Mariadb로 설치합니다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-install&quot; data-lang=&quot;install&quot;&gt;$ sudo apt-get install mariadb-server&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;초기설정시 root의 권한을 풀고 비밀번호를 설정&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-install&quot; data-lang=&quot;install&quot;&gt;$ sudo mysql -u root
+MariaDB [(none)]&amp;gt; use mysql;
+MariaDB [mysql]&amp;gt; UPDATE user SET plugin='' WHERE user='root';
+MariaDB [mysql]&amp;gt; UPDATE user SET password=PASSWORD('내패스워드') WHERE user='root';
+MariaDB [mysql]&amp;gt; FLUSH PRIVILEGES; // 수정사항 적용&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;계정 비밀번호 재설정&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-install&quot; data-lang=&quot;install&quot;&gt;$ mysql -u root -p
+MariaDB [(none)]&amp;gt; use mysql;
+MariaDB [mysql]&amp;gt; update user set password = password('비밀번호') WHERE user='user1';
+MariaDB [mysql]&amp;gt; flush privileges;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;php&quot;&gt;PHP&lt;/h2&gt;
+&lt;p&gt;PHP 버전은 7.0으로 설치합니다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-install&quot; data-lang=&quot;install&quot;&gt;$ sudo apt-get install php7.0&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;PHP와 Apache를 연동시켜줍니다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-install&quot; data-lang=&quot;install&quot;&gt;$ sudo apt-get install libapache2-mod-php7.0&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;phpmyadmin&quot;&gt;phpMyAdmin&lt;/h2&gt;
+&lt;p&gt;phpMyAdmin을 설치합니다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-install&quot; data-lang=&quot;install&quot;&gt;$ sudo apt-get install phpmyadmin&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;접속이 안될경우 apache2.conf에 Include /etc/phpmyadmin/apache.conf 를 추가합니다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-install&quot; data-lang=&quot;install&quot;&gt;$ sudo vi /etc/apache2/apache2.conf
+$ sudo /etc/init.d/apache2 restart&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;link href=&quot;http://localhost:4000/assets/css/about.css&quot; rel=&quot;stylesheet&quot; /&gt;
+
+&lt;div class=&quot;member-area&quot;&gt;
+  &lt;div class=&quot;member-image&quot;&gt;
+  &lt;img class=&quot;profile-image&quot; src=&quot;http://localhost:4000/assets/profile_lucy.png&quot; alt=&quot;sej0518@appknot.com&quot; /&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;member-info&quot;&gt;
+    &lt;div class=&quot;short-info&quot;&gt;
+      &lt;span class=&quot;name&quot;&gt;&lt;a href=&quot;mailto:sej0518@appknot.com&quot;&gt;Lucy Song&lt;/a&gt;&lt;/span&gt;
+      &lt;span class=&quot;sns&quot;&gt;&lt;a class=&quot;sns-icon facebook-icon&quot; href=&quot;https://facebook.com/&quot;&gt;&lt;/a&gt; &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;long-info description&quot;&gt;
+      루시입니다.
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Lucy</name></author><summary type="html">Ubuntu 16.04 에서 기본적인 APM(Apache+PHP+MariaDB)를 설치하는 방법을 설명합니다.</summary></entry><entry><title type="html">UITableViewCell 에 (큰)이미지 사용 시, 셀이 많아질 경우 메모리 문제로 크래쉬 되는 현상</title><link href="http://localhost:4000/blog,jekyll,github/2017/11/29/UITableViewCell%EC%97%90-(%ED%81%B0)%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%82%AC%EC%9A%A9-%EC%8B%9C,-%EC%85%80%EC%9D%B4-%EB%A7%8E%EC%95%84%EC%A7%88-%EA%B2%BD%EC%9A%B0-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EB%AC%B8%EC%A0%9C%EB%A1%9C-%ED%81%AC%EB%9E%98%EC%89%AC-%EB%90%98%EB%8A%94-%ED%98%84%EC%83%81.html" rel="alternate" type="text/html" title="UITableViewCell 에 (큰)이미지 사용 시, 셀이 많아질 경우 메모리 문제로 크래쉬 되는 현상" /><published>2017-11-29T15:50:37+09:00</published><updated>2017-11-29T15:50:37+09:00</updated><id>http://localhost:4000/blog,jekyll,github/2017/11/29/UITableViewCell%EC%97%90-(%ED%81%B0)%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%82%AC%EC%9A%A9-%EC%8B%9C,-%EC%85%80%EC%9D%B4-%EB%A7%8E%EC%95%84%EC%A7%88-%EA%B2%BD%EC%9A%B0-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EB%AC%B8%EC%A0%9C%EB%A1%9C-%ED%81%AC%EB%9E%98%EC%89%AC-%EB%90%98%EB%8A%94-%ED%98%84%EC%83%81</id><content type="html" xml:base="http://localhost:4000/blog,jekyll,github/2017/11/29/UITableViewCell%EC%97%90-(%ED%81%B0)%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%82%AC%EC%9A%A9-%EC%8B%9C,-%EC%85%80%EC%9D%B4-%EB%A7%8E%EC%95%84%EC%A7%88-%EA%B2%BD%EC%9A%B0-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EB%AC%B8%EC%A0%9C%EB%A1%9C-%ED%81%AC%EB%9E%98%EC%89%AC-%EB%90%98%EB%8A%94-%ED%98%84%EC%83%81.html">&lt;h1 id=&quot;문제점&quot;&gt;문제점&lt;/h1&gt;
 
 &lt;p&gt;UITableViewCell에 큰 이미지, 혹은 많은 이미지를 사용하는 경우 Cell 갯수가 많아질 때 메모리문제로 크래쉬가 일어난다.
 단순히 UITableView의 Reuse가 메모리를 알아서 관리해줄 것으로 기대하고 있지만, UITableView Reuse의 역할은, 화면에 안보이는 셀을 화면에서 제거한 후, 이를 메모리에 보관했다가 해당 Row가 다시 보여질 때 빠르게 그리는 용도이다. 따라서, Cell에 붙은 이미지들 역시 모두 메모리상에 사라지지 않고 존재하고 있으므로, 많은 Row수, 또는 이미지 크기로 인해 사용된 메모리가 임계치를 초과하는 경우 앱이 크래쉬된다.&lt;/p&gt;
@@ -88,12 +178,16 @@
       &lt;span class=&quot;sns&quot;&gt;&lt;a class=&quot;sns-icon facebook-icon&quot; href=&quot;https://facebook.com/&quot;&gt;&lt;/a&gt; &lt;/span&gt;
     &lt;/div&gt;
     &lt;div class=&quot;long-info description&quot;&gt;
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In eu mi bibendum neque egestas.
+      메이븐입니다.
     &lt;/div&gt;
   &lt;/div&gt;
-&lt;/div&gt;</content><author><name>Maven Lim</name></author><summary type="html">문제점</summary></entry><entry><title type="html">UITextView 입력된 text의 line 수 가져오기</title><link href="http://localhost:4000/blog,jekyll,github/2017/11/29/UITextView-%EC%9E%85%EB%A0%A5%EB%90%9C-text%EC%9D%98-line-%EC%88%98-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0.html" rel="alternate" type="text/html" title="UITextView 입력된 text의 line 수 가져오기" /><published>2017-11-29T13:37:00+09:00</published><updated>2017-11-29T13:37:00+09:00</updated><id>http://localhost:4000/blog,jekyll,github/2017/11/29/UITextView-%EC%9E%85%EB%A0%A5%EB%90%9C-text%EC%9D%98-line-%EC%88%98-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0</id><content type="html" xml:base="http://localhost:4000/blog,jekyll,github/2017/11/29/UITextView-%EC%9E%85%EB%A0%A5%EB%90%9C-text%EC%9D%98-line-%EC%88%98-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0.html">&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot; data-lang=&quot;objective-c&quot;&gt;CGFloat caretHeight = [textView caretRectForPosition:textView.selectedTextRange.end].size.height;
+&lt;/div&gt;</content><author><name>Maven Lim</name></author><summary type="html">UITableViewCell에서 이미지 사용으로 발생하는 메모리 문제에 대해 이야기합니다.</summary></entry><entry><title type="html">UITextView 입력된 text의 line 수 가져오기</title><link href="http://localhost:4000/blog,jekyll,github/2017/11/29/UITextView-%EC%9E%85%EB%A0%A5%EB%90%9C-text%EC%9D%98-line-%EC%88%98-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0.html" rel="alternate" type="text/html" title="UITextView 입력된 text의 line 수 가져오기" /><published>2017-11-29T13:37:00+09:00</published><updated>2017-11-29T13:37:00+09:00</updated><id>http://localhost:4000/blog,jekyll,github/2017/11/29/UITextView-%EC%9E%85%EB%A0%A5%EB%90%9C-text%EC%9D%98-line-%EC%88%98-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0</id><content type="html" xml:base="http://localhost:4000/blog,jekyll,github/2017/11/29/UITextView-%EC%9E%85%EB%A0%A5%EB%90%9C-text%EC%9D%98-line-%EC%88%98-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0.html">&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot; data-lang=&quot;objective-c&quot;&gt;CGFloat caretHeight = [textView caretRectForPosition:textView.selectedTextRange.end].size.height;
 CGFloat totalHeight = textView.contentSize.height + textView.textContainerInset.top + textView.textContainerInset.bottom;
 NSInteger numberOfLines = (totalHeight/caretHeight) - 1;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;b&lt;/span&gt; 
+&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;iOS 9.1에서 확인됨&lt;/p&gt;
 
@@ -109,10 +203,115 @@ NSInteger numberOfLines = (totalHeight/caretHeight) - 1;&lt;/code&gt;&lt;/pre&gt
       &lt;span class=&quot;sns&quot;&gt;&lt;a class=&quot;sns-icon facebook-icon&quot; href=&quot;https://facebook.com/&quot;&gt;&lt;/a&gt; &lt;/span&gt;
     &lt;/div&gt;
     &lt;div class=&quot;long-info description&quot;&gt;
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In eu mi bibendum neque egestas.
+      메이븐입니다.
     &lt;/div&gt;
   &lt;/div&gt;
-&lt;/div&gt;</content><author><name>Maven Lim</name></author><summary type="html">CGFloat caretHeight = [textView caretRectForPosition:textView.selectedTextRange.end].size.height; CGFloat totalHeight = textView.contentSize.height + textView.textContainerInset.top + textView.textContainerInset.bottom; NSInteger numberOfLines = (totalHeight/caretHeight) - 1;</summary></entry><entry><title type="html">Git관리를 이렇게 해요</title><link href="http://localhost:4000/blog/jekyll/github/2017/11/28/android-github%EA%B4%80%EB%A6%AC.html" rel="alternate" type="text/html" title="Git관리를 이렇게 해요" /><published>2017-11-28T11:02:38+09:00</published><updated>2017-11-28T11:02:38+09:00</updated><id>http://localhost:4000/blog/jekyll/github/2017/11/28/android-github%EA%B4%80%EB%A6%AC</id><content type="html" xml:base="http://localhost:4000/blog/jekyll/github/2017/11/28/android-github%EA%B4%80%EB%A6%AC.html">&lt;p&gt;안녕하세요. 오늘 애기할 주제는 안드로이드 스튜디오에서 Git 연동을 어떻게 시작하면 좋을지에 대해서 설명하고자 합니다.
+&lt;/div&gt;</content><author><name>Maven Lim</name></author><summary type="html">UITextView에 대한 이야기를 합니다.</summary></entry><entry><title type="html">Jekyll 블로그에 댓글 구현하기</title><link href="http://localhost:4000/blog/jekyll/github/2017/11/28/disqus-connect.html" rel="alternate" type="text/html" title="Jekyll 블로그에 댓글 구현하기" /><published>2017-11-28T11:02:38+09:00</published><updated>2017-11-28T11:02:38+09:00</updated><id>http://localhost:4000/blog/jekyll/github/2017/11/28/disqus-connect</id><content type="html" xml:base="http://localhost:4000/blog/jekyll/github/2017/11/28/disqus-connect.html">&lt;p&gt;Jekyll 블로그는 정적 페이지 입니다. 동적 요소인 댓글 구현을 위해 Disqus 서비스를 많이 이용합니다.
+Disqus 서비스를 블로그에 삽입하는 과정을 설명하려고 합니다.
+&lt;br /&gt;&lt;/p&gt;
+&lt;h3 id=&quot;1-disqus-회원가입을-먼저-합니다&quot;&gt;1. Disqus 회원가입을 먼저 합니다.&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://disqus.com&quot;&gt;Disqus 홈페이지&lt;/a&gt;에 회원가입을 하고, [Get Started]를 찾아서 클릭합니다.&lt;/p&gt;
+
+&lt;p&gt;2가지 선택사항 중에 [I Want to Install Disqus on my site] 를 눌러 다음 페이지로 이동합니다.&lt;/p&gt;
+
+&lt;p&gt;WebSite Name과 Category 를 선택하여 입력합니다. (WebSite Name 예시: user@github.io)&lt;/p&gt;
+
+&lt;p&gt;무료로 진행할 경우 [Continue on Basic]을 선택하여 다음으로 이동합니다.&lt;/p&gt;
+
+&lt;p&gt;사용하는 플랫폼을 선택합니다. (이 블로그는 Jekyll 플랫폼을 사용하였습니다.)&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h3 id=&quot;2-jekyll-install-instructions-을-따라합니다&quot;&gt;2. [Jekyll install instructions] 을 따라합니다.&lt;/h3&gt;
+&lt;p&gt;[Jekyll install instructions]를 해석해보면 아래와 같습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;strong&gt;&amp;lt;1&amp;gt;&lt;/strong&gt; YAML Front Matter에 &lt;code class=&quot;highlighter-rouge&quot;&gt;comments:true&lt;/code&gt;를 작성합니다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;na&quot;&gt;layout&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;android-post&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Getting Started with Android Studio&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;comments&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;user-defined-variable&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;This is a text sentence.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;br /&gt;
+ &lt;strong&gt;&amp;lt;2&amp;gt;&lt;/strong&gt; Disqus를 로드할 &lt;strong&gt;Universal Embeded Code&lt;/strong&gt; 를 작성합니다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;원문&amp;gt;
+In between a {% if page.comments %} and a {% endif %} tag, copy and paste
+the Universal Embed Code in the appropriate template
+where you'd like Disqus to load.
+
+&amp;lt;해석&amp;gt;
+페이지 코멘트 설정이 되어있으면 (if page.comments),
+Disqus를 로드할 **Universal Embeded Code** 를 붙여 넣으면 된다.
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;
+&lt;strong&gt;Universal Embeded Code란?&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Universal Embeded Code 란 사이트에 Disqus를 로드하고 표시하는 JavaScript 코드 입니다.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;
+&lt;strong&gt;Universal Embeded Code 예제&lt;/strong&gt; ( _includes 폴더에 작성된 disqus.html 입니다. )&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt; {% if page.comments %} 
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;disqus_thread&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// DON'T EDIT BELOW THIS LINE&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'script'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'https://https-tech-knot-github-io.disqus.com/embed.js'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setAttribute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'data-timestamp'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;head&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;appendChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})();&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;noscript&amp;gt;&lt;/span&gt;Please enable JavaScript to view the &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://disqus.com/?ref_noscript&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;comments powered by Disqus.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&amp;lt;/noscript&amp;gt;&lt;/span&gt;
+ {% endif %} &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;참고로 이 블로그는 _includes폴더에 disqus.html파일을 따로 만들고, 사용할 post페이지에서 include하여 사용하였습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;em&gt;출처: &lt;a href=&quot;https://help.disqus.com/customer/portal/articles/472097-universal-embed-code&quot;&gt;Universal Embed Code란&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;link href=&quot;http://localhost:4000/assets/css/about.css&quot; rel=&quot;stylesheet&quot; /&gt;
+
+&lt;div class=&quot;member-area&quot;&gt;
+  &lt;div class=&quot;member-image&quot;&gt;
+  &lt;img class=&quot;profile-image&quot; src=&quot;http://localhost:4000/assets/profile_gil.png&quot; alt=&quot;story9076@appknot.com&quot; /&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;member-info&quot;&gt;
+    &lt;div class=&quot;short-info&quot;&gt;
+      &lt;span class=&quot;name&quot;&gt;&lt;a href=&quot;mailto:story9076@appknot.com&quot;&gt;Gil Kim&lt;/a&gt;&lt;/span&gt;
+      &lt;span class=&quot;sns&quot;&gt;&lt;a class=&quot;sns-icon facebook-icon&quot; href=&quot;https://facebook.com/&quot;&gt;&lt;/a&gt; &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;long-info description&quot;&gt;
+       안드로이드 개발자
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://https-tech-knot-github-io.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+&lt;/script&gt;
+
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;https://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;</content><author><name>Gil Kim</name></author><summary type="html">Jekyll 블로그에 댓글 서비스인 Disqus를 연동하는 방법을 설명합니다.</summary></entry><entry><title type="html">Git관리를 이렇게 해요</title><link href="http://localhost:4000/blog/jekyll/github/2017/11/28/android-github%EA%B4%80%EB%A6%AC.html" rel="alternate" type="text/html" title="Git관리를 이렇게 해요" /><published>2017-11-28T11:02:38+09:00</published><updated>2017-11-28T11:02:38+09:00</updated><id>http://localhost:4000/blog/jekyll/github/2017/11/28/android-github%EA%B4%80%EB%A6%AC</id><content type="html" xml:base="http://localhost:4000/blog/jekyll/github/2017/11/28/android-github%EA%B4%80%EB%A6%AC.html">&lt;p&gt;안녕하세요. 오늘 애기할 주제는 안드로이드 스튜디오에서 Git 연동을 어떻게 시작하면 좋을지에 대해서 설명하고자 합니다.
 &lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&quot;시작에-앞서&quot;&gt;시작에 앞서..&lt;/h2&gt;
 &lt;p&gt;일단 저희 안드로이드 개발팀은 소규모로 구성되어 있습니다. 2명이서 협업을 한 프로젝트도 있지만, 대부분은 1인 1프로젝트로 진행이 됩니다.
@@ -180,10 +379,32 @@ feature-1, feature-2, feature-3 이렇게 3가지의 feature 브랜치들을 생
       &lt;span class=&quot;sns&quot;&gt;&lt;a class=&quot;sns-icon facebook-icon&quot; href=&quot;https://facebook.com/&quot;&gt;&lt;/a&gt; &lt;/span&gt;
     &lt;/div&gt;
     &lt;div class=&quot;long-info description&quot;&gt;
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In eu mi bibendum neque egestas.
+       안드로이드 개발자
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
+
+&lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://https-tech-knot-github-io.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+&lt;/script&gt;
+
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;https://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Gil Kim</name></author><summary type="html">안드로이드 프로젝트에서 Git관리를 어떻게 하는지에 대해서 이야기를 합니다.</summary></entry><entry><title type="html">Getting Started with Jekyll</title><link href="http://localhost:4000/blog,jekyll,github/2017/11/27/getting-started-with-jekyll.html" rel="alternate" type="text/html" title="Getting Started with Jekyll" /><published>2017-11-27T11:52:38+09:00</published><updated>2017-11-27T11:52:38+09:00</updated><id>http://localhost:4000/blog,jekyll,github/2017/11/27/getting-started-with-jekyll</id><content type="html" xml:base="http://localhost:4000/blog,jekyll,github/2017/11/27/getting-started-with-jekyll.html">&lt;style&gt;
 	table {
@@ -373,6 +594,10 @@ feature-1, feature-2, feature-3 이렇게 3가지의 feature 브랜치들을 생
       &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tags&lt;/code&gt;&lt;/td&gt;
       &lt;td&gt;카테고리와 유사하며 하나 이상의 태그를 추가할 수 있습니다. 두 개 이상의 태그를 지정할 때는 쉼표로 구분합니다.&lt;/td&gt;
     &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;excerpt&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;본문에 대한 설명을 작성합니다. 포스트 목록에서 표시되는 요약 내용입니다.&lt;/td&gt;
+    &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
 
@@ -448,4 +673,4 @@ code
     &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;%d&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;&lt;em&gt;출처 : &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EA%B1%B0%ED%92%88_%EC%A0%95%EB%A0%AC&quot;&gt;거품정렬 - 위키백과&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;</content><author><name>Damien Jang</name></author><summary type="html"></summary></entry></feed>
+&lt;p&gt;&lt;em&gt;출처 : &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EA%B1%B0%ED%92%88_%EC%A0%95%EB%A0%AC&quot;&gt;거품정렬 - 위키백과&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;</content><author><name>Damien Jang</name></author><summary type="html">Jekyll을 이용해 블로그를 사용하는 방법에 대해 이야기합니다.</summary></entry></feed>
