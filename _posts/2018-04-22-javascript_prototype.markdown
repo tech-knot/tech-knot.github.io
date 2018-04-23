@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Javascript에서 Prototype이란?
-date:   2017-11-28 11:02:38 +0900
+date:   2018-04-22 11:02:38 +0900
 categories: blog jekyll github
 excerpt: Javascript에서 객체지향적인 기능을 담당하는 Prototype에 대해서 설명합니다.
 author: Gil Kim
@@ -37,7 +37,7 @@ author: Gil Kim
 
 **다음의 예제를 통해 더 자세히 알아보겠습니다.**
 
-![예제1]({{ site.url }}/assets/javascript_prototype_2.png)
+![예제1](https://tech-knot.github.io/assets/javascript_prototype_2.PNG)
 1. Person이라는 함수를 선언하였습니다. 함수를 선언함과 동시에 Person 프로토타입 객체가 만들어 집니다.
 2. Person의 프로토타입 객체에 eyes와 nose라는 변수를 선언하였습니다.
 3. kim 이라는 Person 객체를 생성하였습니다.
@@ -45,7 +45,7 @@ author: Gil Kim
 
 <br>
 **구조를 살펴보면 다음과 같습니다.**
-![예제2]({{ site.url }}/assets/javascript_prototype_1.png)
+![예제2](https://tech-knot.github.io/assets/javascript_prototype_1.PNG)
 
 먼저 객체생성에는 생성자가 꼭 필요합니다.( Person(), Object() 같이)<br>
 Person객체를 선언하면, Person프로토타입을 가지게 됩니다.<br>
