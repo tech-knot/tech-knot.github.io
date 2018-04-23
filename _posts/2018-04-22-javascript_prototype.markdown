@@ -32,7 +32,8 @@ author: Gil Kim
 
 <br>
 ### 3. 프로토타입이란?
-프로토타입이란 메모리를 할당받은 실 객체라고 보시면 됩니다.<br>
+프로토타입은 객체지향 언어에서 사용하는 클래스와 비슷합니다. <br>
+메모리를 할당받은 실 객체라고 보시면 됩니다.<br>
 자바에서도 최상위 객체가 Object 인것처럼, 자바스크립트에서도 최상위 객체는 Object입니다.
 
 **다음의 예제를 통해 더 자세히 알아보겠습니다.**
@@ -47,20 +48,24 @@ author: Gil Kim
 **구조를 살펴보면 다음과 같습니다.**
 ![예제2](https://tech-knot.github.io/assets/javascript_prototype_1.PNG)
 
-먼저 객체생성에는 생성자가 꼭 필요합니다.( Person(), Object() 같이)<br>
-Person객체를 선언하면, Person프로토타입을 가지게 됩니다.<br>
-kim도 Person 객체이기 때문에 같은 프로토타입을 가지게 됩니다.<br>
-그리고 Person프로토타입의 상위 프로토타입 객체는 Object입니다.<br>
+Person function을 선언하면, Person프로토타입을 생성하게 됩니다.<br>
+kim도 Person 객체이기 때문에 같은 프로토타입을 가지게 됩니다. (Person 프로토타입을 상속받은 것과 비슷합니다.)<br>
+Person프로토타입의 상위 프로토타입 객체는 Object입니다. 따라서 Person 프로토타입의 \__proto__ 는 Object 프로토타입을 가리키게 됩니다. <br><br>
+
+프로토타입은 생성자(constructor)를 꼭 가지고 있습니다. <br>
+Person과 Object 프로토타입은 각각 생성자를 가지고 있습니다.
 
 ### 4. 위의 1번에서 언급했던 Prototype의 사용 예를 설명드리겠습니다.
-  **1.** jQuery.prototype 에 backgroundCycle이라는 function을 추가 한 것입니다.
+  **1.** jQuery.prototype 에 backgroundCycle이라는 function을 추가 한 것입니다. <br>
+  그러므로 jQuery 의 내장 함수처럼 backgroundCycle 함수를 사용할 수 있게 됩니다.
+
 {% highlight JavaScript %}
 $.fn.backgroundCycle = function(options) {
   .. 코드 ..
 }
 {% endhighlight %}
 
-jQuery 의 내장 함수처럼 사용할 수 있게 됩니다.
+
 
   **2.** Array.prototype 에 duplicator라는 function을 추가 한 것입니다.
 
